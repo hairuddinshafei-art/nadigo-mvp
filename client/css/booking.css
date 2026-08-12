@@ -1,0 +1,463 @@
+/* =====================
+   NADIGO BOOKING PAGE
+===================== */
+
+
+/* PAGE */
+
+.booking-page {
+
+    min-height: 90vh;
+
+    padding: 70px 20px;
+
+    background: #f8fafc;
+
+}
+
+
+
+.booking-header {
+
+    text-align: center;
+
+    margin-bottom: 40px;
+
+}
+
+
+
+.booking-header h1 {
+
+    font-size: 45px;
+
+    color: #1d4ed8;
+
+    margin-bottom: 15px;
+
+}
+
+
+
+.booking-header p {
+
+    color: #64748b;
+
+    font-size: 18px;
+
+}
+
+
+
+
+
+/* CONTAINER */
+
+
+.booking-container {
+
+    max-width: 700px;
+
+    margin: auto;
+
+}
+
+
+
+
+
+/* PROGRESS */
+
+
+.progress {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 40px;
+
+    position: relative;
+
+}
+
+
+
+.progress div {
+
+    width: 45px;
+
+    height: 45px;
+
+    background: #e2e8f0;
+
+    color: #64748b;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: bold;
+
+    position: relative;
+
+}
+
+
+
+.progress span {
+
+    position: absolute;
+
+    top: 55px;
+
+    font-size: 14px;
+
+    color: #64748b;
+
+    width: 100px;
+
+    text-align: center;
+
+}
+
+
+
+.progress .active {
+
+    background: #2563eb;
+
+    color: white;
+
+}
+
+
+
+
+
+/* FORM CARD */
+
+
+.booking-form {
+
+    background: white;
+
+    padding: 45px;
+
+    border-radius: 25px;
+
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+
+}
+
+
+
+.booking-form h2 {
+
+    color: #1e3a8a;
+
+    margin-bottom: 25px;
+
+    margin-top: 20px;
+
+}
+
+
+
+.booking-form label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: 600;
+
+    color: #334155;
+
+}
+
+
+
+.booking-form input,
+.booking-form textarea,
+.booking-form select {
+
+
+    width: 100%;
+
+    padding: 15px;
+
+    margin-bottom: 25px;
+
+    border-radius: 12px;
+
+    border: 1px solid #cbd5e1;
+
+    font-size: 16px;
+
+    outline: none;
+
+}
+
+
+
+.booking-form input:focus,
+.booking-form textarea:focus,
+.booking-form select:focus {
+
+    border-color: #2563eb;
+
+}
+
+
+
+.booking-form textarea {
+
+    height: 120px;
+
+    resize: none;
+
+}
+
+
+
+
+
+/* BUTTON */
+
+
+.booking-form button {
+
+    width: 100%;
+
+    padding: 18px;
+
+    background: #2563eb;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 35px;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+
+}
+
+
+.booking-form button:hover {
+
+    background: #1d4ed8;
+
+    transform: translateY(-3px);
+
+}
+
+
+
+.booking-form button:hover {
+
+    background: #1d4ed8;
+
+    transform: translateY(-3px);
+
+}
+
+
+.continue-btn {
+
+    display: block;
+
+    width: 100%;
+
+    padding: 18px;
+
+    background: #2563eb;
+
+    color: white;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    border-radius: 35px;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    transition: 0.3s;
+
+}
+
+
+.continue-btn:hover {
+
+    background: #1d4ed8;
+
+    transform: translateY(-3px);
+
+}
+
+
+/* MOBILE */
+
+
+@media(max-width:768px){
+
+
+.booking-form {
+
+    padding: 25px;
+
+}
+
+
+.booking-header h1 {
+
+    font-size: 35px;
+
+}
+
+
+}
+
+#weightSlider {
+    width:100%;
+    height:8px;
+    border-radius:10px;
+    outline:none;
+    appearance:none;
+    cursor:pointer;
+
+    background: linear-gradient(
+        to right,
+        #0066ff 0%,
+        #0066ff 10%,
+        #ddd 10%,
+        #ddd 100%
+    );
+}
+
+
+/* Chrome, Edge, Safari */
+#weightSlider::-webkit-slider-thumb {
+
+    appearance:none;
+
+    width:22px;
+    height:22px;
+
+    border-radius:50%;
+
+    background:#0066ff;
+
+    cursor:pointer;
+
+}
+
+
+/* Firefox */
+#weightSlider::-moz-range-thumb {
+
+    width:22px;
+    height:22px;
+
+    border-radius:50%;
+
+    background:#0066ff;
+
+    cursor:pointer;
+
+}
+
+.phone-input {
+
+    display: flex;
+
+    align-items: center;
+
+    height: 48px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    background: white;
+
+}
+
+
+.phone-prefix {
+
+    height: 48px;
+
+    padding: 0 12px;
+
+    background: #f1f5f9;
+
+    color: #334155;
+
+    font-weight: 600;
+
+    font-size: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    box-sizing: border-box;
+
+}
+
+
+.phone-input input {
+
+    flex: 1;
+
+    width: 100%;
+
+    height: 48px;
+
+    padding: 0 14px;
+
+    margin: 0;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-size: 16px;
+
+    line-height: normal;
+
+    display: flex;
+
+    align-items: center;
+
+    box-sizing: border-box;
+
+}
+
+
+.phone-input:focus-within {
+
+    border-color: #2563eb;
+
+}

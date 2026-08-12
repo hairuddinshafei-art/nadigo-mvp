@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NadiGo Tracking</title>
+
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" href="../css/home.css">
+
+    <link rel="stylesheet" href="../css/tracking.css">
+
+
+</head>
+
+
+<body>
+
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+
+            <div class="logo">
+                Nadi<span>Go</span>
+            </div>
+
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="../index.html">
+                        Home
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="../index.html#services">
+                        Services
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="../index.html#how">
+                        How It Works
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="#">
+                        Contact
+                    </a>
+                </li>
+
+
+            </ul>
+
+
+        </div>
+
+    </nav>
+
+
+
+
+    <section class="tracking">
+
+
+        <div class="tracking-card">
+
+
+            <h1>
+                Track Your Order
+            </h1>
+
+
+            <p>
+                Pantau status cucian anda secara masa nyata.
+            </p>
+
+
+
+            <hr>
+
+
+
+            <div class="tracking-info">
+
+
+                <div class="info-row">
+
+                    <span>
+                        Order ID
+                    </span>
+
+                    <strong id="trackOrderID">
+
+                    </strong>
+
+                </div>
+
+
+
+                <div class="info-row">
+
+                    <span>
+                        Customer
+                    </span>
+
+                    <strong id="trackName">
+
+                    </strong>
+
+                </div>
+
+
+
+
+                <div class="info-row">
+
+                    <span>
+                        Service
+                    </span>
+
+                    <strong id="trackService">
+
+                    </strong>
+
+                </div>
+
+
+
+
+
+                <div class="info-row">
+
+                    <span>
+                        Estimated Weight
+                    </span>
+
+                    <strong id="trackWeight"></strong>
+
+                </div>
+
+
+                <div class="info-row" id="actualWeightRow" style="display: none;">
+
+                    <span>
+                        Actual Weight
+                    </span>
+
+                    <strong id="trackActualWeight"></strong>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>
+                        Estimated Price
+                    </span>
+
+                    <strong id="trackPrice"></strong>
+
+                </div>
+
+
+                <div class="info-row" id="actualPriceRow" style="display: none;">
+
+                    <span>
+                        Final Price
+                    </span>
+
+                    <strong id="trackActualPrice"></strong>
+
+                </div>
+
+            </div>
+
+
+
+
+
+            <h2>
+                Current Status
+            </h2>
+
+
+
+
+            <div class="current-status" id="trackStatus">
+
+            </div>
+
+
+
+
+
+            <div class="timeline">
+
+                <div id="step1">
+                    ○ Booking Received
+                </div>
+
+
+                <div id="step2">
+                    ○ Pickup Scheduled
+                </div>
+
+
+                <div id="step3">
+                    ○ Laundry Processing
+                </div>
+
+
+                <div id="step4">
+                    ○ Ready for Delivery
+                </div>
+
+
+                <div id="step5">
+                    ○ Delivered
+                </div>
+
+
+            </div>
+
+
+
+
+            <br>
+
+
+
+            <a href="../index.html" class="back-btn">
+
+                ← Back To Home
+
+            </a>
+
+
+
+
+        </div>
+
+
+    </section>
+
+
+    <script src="../js/script.js"></script>
+
+    <script>
+        loadTracking();
+    </script>
+
+</body>
+
+</html>

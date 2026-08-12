@@ -1,0 +1,308 @@
+.order-detail {
+
+    min-height: 90vh;
+
+    background: #f8fafc;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 40px;
+
+}
+
+
+
+.detail-card {
+
+    background: white;
+
+    width: 500px;
+
+    padding: 40px;
+
+    border-radius: 25px;
+
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+
+}
+
+
+
+.detail-card h1 {
+
+    color: #2563eb;
+
+    margin-bottom: 30px;
+
+}
+
+
+
+.info p {
+
+    margin-bottom: 18px;
+
+    color: #334155;
+
+}
+
+
+
+.status {
+
+    background: #fef3c7;
+
+    color: #92400e;
+
+    padding: 6px 15px;
+
+    border-radius: 20px;
+
+    font-weight: bold;
+
+}
+
+
+
+.detail-card #acceptBtn {
+
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+.detail-card #acceptBtn:hover {
+
+    background: #1d4ed8;
+
+}
+
+
+.detail-card button:hover {
+
+    background: #1d4ed8;
+
+}
+
+
+.back-btn:hover {
+
+    background: #2563eb;
+
+    color: white;
+
+    transform: translateY(-3px);
+
+}
+
+.info-section {
+
+    background: #f8fafc;
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.info-section h3 {
+
+    color: #2563eb;
+
+    margin-bottom: 15px;
+
+}
+
+
+.info-section p {
+
+    margin-bottom: 10px;
+
+}
+
+/* ORDER STATUS */
+
+#statusSelect {
+
+    width: 100%;
+
+    padding: 15px;
+
+    margin-top: 15px;
+
+    border-radius: 12px;
+
+    border: 1px solid #cbd5e1;
+
+    background: white;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+}
+
+
+#statusSelect:focus {
+
+    outline: none;
+
+    border-color: #2563eb;
+
+}
+
+
+/* UPDATE STATUS BUTTON */
+
+.update-btn {
+
+    width: 100%;
+
+    margin-top: 15px;
+
+    padding: 15px;
+
+    border-radius: 30px;
+
+    border: none;
+
+    background: #0f766e;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+/* ACCEPT BUTTON */
+
+#acceptBtn {
+
+    width: 100%;
+
+    margin-top: 15px;
+
+    padding: 15px;
+
+    border-radius: 30px;
+
+    border: none;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+/* BACK BUTTON */
+
+.back-btn {
+
+    display: block;
+
+    margin-top: 15px;
+
+    padding: 15px;
+
+    text-align: center;
+
+    border-radius: 30px;
+
+    background: white;
+
+    color: #2563eb;
+
+    border: 2px solid #2563eb;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+}
+
+.actual-price-section {
+    margin-top: 25px;
+    padding: 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #f8fafc;
+}
+
+.actual-price-section h3 {
+    margin-bottom: 18px;
+}
+
+.actual-price-section p {
+    margin: 12px 0 6px;
+}
+
+.actual-price-section input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+}
+
+.actual-price-section input:focus {
+    border-color: #2563eb;
+}
+
+.save-price-btn {
+    width: 100%;
+    margin-top: 18px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.actual-save-message {
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+.actual-save-message.success {
+    font-weight: 600;
+}

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NadiGo Confirmation</title>
+
+
+<link rel="stylesheet" href="../css/style.css">
+
+<link rel="stylesheet" href="../css/home.css">
+
+<link rel="stylesheet" href="../css/confirmation.css">
+
+
+</head>
+
+
+<nav class="navbar">
+
+<div class="nav-container">
+
+
+<div class="logo">
+Nadi<span>Go</span>
+</div>
+
+
+
+<ul class="nav-links">
+
+<li>
+<a href="../index.html">
+Home
+</a>
+</li>
+
+
+<li>
+<a href="../index.html#services">
+Services
+</a>
+</li>
+
+
+<li>
+<a href="../index.html#how">
+How It Works
+</a>
+</li>
+
+
+<li>
+<a href="#">
+Contact
+</a>
+</li>
+
+
+</ul>
+
+
+<button class="nav-button">
+Book Now
+</button>
+
+
+</div>
+
+</nav>
+
+
+
+
+
+<section class="confirmation">
+
+
+<div class="success-card">
+
+
+<div class="check">
+✓
+</div>
+
+
+<h1>
+Booking Received!
+</h1>
+
+
+<p>
+Terima kasih kerana memilih NadiGo.
+Kami akan uruskan pickup laundry anda.
+</p>
+
+
+
+<div class="order-box">
+
+
+<h3>
+Order ID
+</h3>
+
+
+<p id="confirmOrderID">
+
+</p>
+
+
+
+<h3>
+Customer Details
+</h3>
+
+
+<p>
+<strong>Name:</strong>
+<span id="confirmName"></span>
+</p>
+
+
+<p>
+<strong>Phone:</strong>
+<span id="confirmPhone"></span>
+</p>
+
+
+<p>
+<strong>Address:</strong>
+<span id="confirmAddress"></span>
+</p>
+
+
+
+<h3>
+Laundry Details
+</h3>
+
+
+<p>
+<strong>Service:</strong>
+<span id="confirmService"></span>
+</p>
+
+
+<p>
+<strong>Weight:</strong>
+<span id="confirmWeight"></span>
+</p>
+
+
+<p>
+<strong>Price:</strong>
+<span id="confirmPrice"></span>
+</p>
+
+
+</div>
+
+
+
+<div class="confirmation-buttons">
+
+    <a id="trackOrderBtn" class="track-btn">
+    Track My Order
+</a>
+
+    <a href="../index.html" class="home-btn">
+        Back To Home
+    </a>
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+<script src="../js/script.js"></script>
+
+<script>
+
+let bookingData = JSON.parse(
+    localStorage.getItem("nadigoBooking")
+);
+
+
+console.log("CONFIRMATION DATA:", bookingData);
+
+
+if(bookingData){
+
+
+    document.getElementById("confirmOrderID").innerHTML =
+    bookingData.orderID;
+
+
+    document.getElementById("confirmName").innerHTML =
+    bookingData.name;
+
+
+    document.getElementById("confirmPhone").innerHTML =
+    bookingData.phone;
+
+
+    document.getElementById("confirmAddress").innerHTML =
+    bookingData.address;
+
+
+    document.getElementById("confirmService").innerHTML =
+    bookingData.service;
+
+
+    document.getElementById("confirmWeight").innerHTML =
+    bookingData.weight + "kg";
+
+
+    document.getElementById("confirmPrice").innerHTML =
+    bookingData.price;
+
+
+
+    document.getElementById("trackOrderBtn").href =
+    "tracking.html?id=" + bookingData.orderID;
+
+
+}
+
+else{
+
+    console.log("TIADA DATA BOOKING");
+
+}
+
+
+</script>
+
+</body>
+
+</html>

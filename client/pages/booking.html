@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NadiGo Booking</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/booking.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+</head>
+
+
+<body>
+
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <div class="logo">
+                Nadi<span>Go</span>
+            </div>
+            <ul class="nav-links">
+
+                <li>
+                    <a href="../index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="../index.html#services">Services</a>
+                </li>
+
+                <li>
+                    <a href="../index.html#how">How It Works</a>
+                </li>
+
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+
+            </ul>
+
+
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <section class="booking-page">
+
+
+        <div class="booking-header">
+
+            <h1>
+                Book Your Laundry Pickup
+            </h1>
+
+            <p>
+                Isi maklumat dan kami akan uruskan pickup anda.
+            </p>
+
+        </div>
+
+
+
+        <div class="booking-container">
+
+
+            <div class="progress">
+
+
+                <div class="active">
+                    1
+                    <span>
+                        Pickup
+                    </span>
+                </div>
+
+
+                <div>
+                    2
+                    <span>
+                        Laundry
+                    </span>
+                </div>
+
+
+                <div>
+                    3
+                    <span>
+                        Confirm
+                    </span>
+                </div>
+
+
+            </div>
+
+
+            <div class="booking-form">
+
+
+                <h2>
+                    Pickup Details
+                </h2>
+
+
+                <label>
+                    Nama
+                </label>
+
+                <input id="customerName" type="text" placeholder="Nama penuh">
+
+
+                <div class="form-group">
+
+    <label>
+        No Telefon
+    </label>
+
+    <div class="phone-input">
+
+        <span class="phone-prefix">
+            +60
+        </span>
+
+        <input
+            id="customerPhone"
+            type="tel"
+            placeholder="123456789"
+            maxlength="10"
+        >
+
+    </div>
+
+</div>
+
+
+
+                <label>
+                    Alamat Pickup
+                </label>
+
+                <textarea id="customerAddress" placeholder="Alamat rumah"></textarea>
+
+
+
+
+                <h2>
+                    Laundry Details
+                </h2>
+
+
+
+                <label>
+                    Jenis Servis
+                </label>
+
+
+                <select id="serviceSelect" onchange="calculatePrice()">
+
+                    <option value="Wash & Fold">
+                        Wash & Fold
+                    </option>
+
+                    <option value="Express Laundry">
+                        Express Laundry
+                    </option>
+
+                </select>
+
+
+                <div class="weight-section">
+
+                    <div class="weight-header">
+
+                        <label>
+                            Anggaran Berat
+                        </label>
+
+                        <strong>
+                            <span id="weightValue">
+                                3.0
+                            </span>kg
+                        </strong>
+
+                    </div>
+
+
+                    <input
+    type="range"
+    id="weightSlider"
+    min="1"
+    max="20"
+    step="0.1"
+    value="3"
+    oninput="calculatePrice()"
+>
+
+
+
+
+
+                </div>
+
+
+                <p>
+                    Estimated Price:
+                    <strong id="sliderPrice">
+                        RM27
+                    </strong>
+                </p>
+
+
+                <small>
+                    Anggaran harga berdasarkan berat pilihan anda. Harga akhir akan dikira selepas timbang sebenar. Caj minimum RM27.
+                </small>
+
+                <div class="form-group">
+
+                    <label>
+                        Pickup Date
+                    </label>
+
+
+                    <input type="text" id="pickupDate" placeholder="Select pickup date">
+
+                </div>
+
+
+                <button type="button" onclick="saveBooking()" class="continue-btn">
+    Continue Booking →
+</button>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script src="../js/script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NadiGo Dashboard</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <div class="logo">
+                Nadi<span>Go</span>
+            </div>
+
+            <ul class="nav-links">
+
+                <li><a href="../index.html">Home</a></li>
+                <li>
+                    <a href="./orders.html">Orders</a>
+                </li>
+                <li><a href="#">Customers</a></li>
+                <li><a href="#">Settings</a></li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+    <section class="dashboard">
+
+
+        <div class="sidebar">
+
+
+            <h2>
+                Nadi<span>Go</span>
+            </h2>
+
+
+            <ul>
+
+                <li class="active">
+                    Dashboard
+                </li>
+
+                <li>
+                    <a href="./orders.html">Orders</a>
+                </li>
+                <li>
+                    Customers
+                </li>
+
+                <li>
+                    Settings
+                </li>
+
+                <li>
+    <a href="#" onclick="adminLogout()">
+        Logout
+    </a>
+</li>
+
+
+            </ul>
+
+
+        </div>
+
+
+
+
+
+        <div class="dashboard-content">
+
+
+            <h1>
+                Admin Dashboard
+            </h1>
+
+
+
+
+            <div class="cards">
+
+
+                <div class="card">
+                    <h2 id="newOrdersCount">0</h2>
+                    <p>New Orders</p>
+                </div>
+
+
+
+                <div class="card">
+                    <h2 id="pendingCount">0</h2>
+                    <p>Pending</p>
+                </div>
+
+
+
+
+                <div class="card">
+                    <h2 id="processingCount">0</h2>
+                    <p>Processing</p>
+                </div>
+
+
+
+
+                <div class="card">
+                    <h2 id="readyCount">0</h2>
+                    <p>Ready</p>
+                </div>
+
+
+
+            </div>
+
+            <div class="orders">
+                <h2>
+                    Recent Orders
+                </h2>
+
+                <div id="ordersContainer">
+
+                    <div class="order-item">
+
+                        <div>
+
+                            <h3 id="dashboardOrderID"></h3>
+
+                            <p>
+                                Customer:
+                                <span id="dashboardName"></span>
+                            </p>
+
+                            <p>
+                                Weight:
+                                <span id="dashboardWeight"></span>
+                            </p>
+
+                        </div>
+
+                        <span class="status pending" id="dashboardStatus">
+                            Booking Received
+                        </span>
+
+                        <div class="orderAction">
+
+                            <a href="order-detail.html" class="view-btn">
+                                View
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+    </section>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/admin-auth.js"></script>
+
+<script>
+    checkAdminLogin();
+</script>
+
+    <script>
+
+    loadDashboardRecentOrders();
+
+    loadDashboardStats();
+
+</script>
+
+</body>
+
+</html>

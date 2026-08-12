@@ -1,0 +1,585 @@
+/* =========================
+   NADIGO PARTNER DASHBOARD V2
+========================= */
+
+
+.dashboard {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    background: #f8fafc;
+
+}
+
+
+/* SIDEBAR */
+
+
+.sidebar {
+
+    width: 260px;
+
+    background: white;
+
+    padding: 35px 25px;
+
+    box-shadow: 5px 0 20px rgba(0,0,0,0.05);
+
+}
+
+
+
+.sidebar h2 {
+
+    font-size: 28px;
+
+    color: #2563eb;
+
+    margin-bottom: 40px;
+
+}
+
+
+.sidebar h2 span {
+
+    color: #1d4ed8;
+
+}
+
+
+
+.sidebar ul {
+
+    list-style: none;
+
+}
+
+
+
+.sidebar li {
+
+    padding: 15px 20px;
+
+    margin-bottom: 10px;
+
+    border-radius: 12px;
+
+    color: #64748b;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+
+
+.sidebar li:hover,
+.sidebar .active {
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+}
+
+
+
+
+
+/* CONTENT */
+
+
+.dashboard-content {
+
+    flex: 1;
+
+    padding: 45px;
+
+}
+
+
+
+.dashboard-content h1 {
+
+    color: #0f172a;
+
+    margin-bottom: 35px;
+
+    font-size: 38px;
+
+}
+
+
+
+
+
+/* CARDS */
+
+
+.cards {
+
+    display: grid;
+
+    grid-template-columns: repeat(4,1fr);
+
+    gap: 25px;
+
+    margin-bottom: 40px;
+
+}
+
+
+
+.card {
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+
+}
+
+
+
+.card h2 {
+
+    color: #2563eb;
+
+    font-size: 40px;
+
+    margin-bottom: 10px;
+
+}
+
+
+
+.card p {
+
+    color: #64748b;
+
+}
+
+
+
+
+
+/* ORDERS */
+
+
+.orders {
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 25px;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+
+}
+
+
+
+.orders h2 {
+
+    margin-bottom: 25px;
+
+}
+
+
+
+
+
+.order-item {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 25px 0;
+
+    border-bottom: 1px solid #e2e8f0;
+
+}
+
+
+
+.order-item h3 {
+
+    color: #1e293b;
+
+    margin-bottom: 5px;
+
+}
+
+
+
+.order-item p {
+
+    color: #64748b;
+
+}
+
+
+
+
+
+/* STATUS */
+
+
+.order-item span {
+
+    padding: 8px 18px;
+
+    border-radius: 30px;
+
+    font-weight: bold;
+
+    font-size: 14px;
+
+}
+
+
+
+.pending {
+
+    background: #fef3c7;
+
+    color: #92400e;
+
+}
+
+
+
+.processing {
+
+    background: #dbeafe;
+
+    color: #1d4ed8;
+
+}
+
+
+
+.ready {
+
+    background: #dcfce7;
+
+    color: #166534;
+
+}
+
+
+
+
+
+/* BUTTON */
+
+
+.order-item button {
+
+    background: #2563eb;
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 25px;
+
+    border-radius: 25px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+
+}
+
+
+
+.order-item button:hover {
+
+    background: #1d4ed8;
+
+    transform: translateY(-2px);
+
+}
+
+
+/* =========================
+   MOBILE DASHBOARD
+========================= */
+
+@media (max-width: 900px) {
+
+    .dashboard {
+        display: block;
+        min-height: 100vh;
+    }
+
+
+    /* SIDEBAR JADI TOP MENU */
+
+    .sidebar {
+        width: 100%;
+        padding: 18px 20px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+    }
+
+
+    .sidebar h2 {
+        font-size: 22px;
+        margin: 0;
+    }
+
+
+    .sidebar ul {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        margin: 0;
+        padding: 0;
+    }
+
+
+    .sidebar li {
+        padding: 8px 10px;
+        margin: 0;
+
+        font-size: 13px;
+        border-radius: 8px;
+    }
+
+
+    .dashboard-content {
+        padding: 25px 20px;
+    }
+
+
+    .dashboard-content h1 {
+        font-size: 30px;
+        margin-bottom: 25px;
+    }
+
+
+    /* STAT CARDS */
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-bottom: 25px;
+    }
+
+
+    .card {
+        padding: 20px 15px;
+        border-radius: 16px;
+    }
+
+
+    .card h2 {
+        font-size: 30px;
+    }
+
+
+    .card p {
+        font-size: 13px;
+    }
+
+
+    /* ORDERS */
+
+    .orders {
+        padding: 20px 16px;
+        border-radius: 18px;
+    }
+
+
+    .orders h2 {
+        font-size: 21px;
+        margin-bottom: 15px;
+    }
+
+
+    .order-item {
+        display: grid;
+
+        grid-template-columns: 1fr auto;
+
+        gap: 12px;
+
+        padding: 18px 0;
+    }
+
+
+    .order-item h3 {
+        font-size: 16px;
+    }
+
+
+    .order-item p {
+        font-size: 13px;
+        margin: 4px 0;
+    }
+
+
+    .order-item > .status {
+        align-self: start;
+        justify-self: end;
+
+        padding: 6px 10px;
+
+        font-size: 11px;
+    }
+
+
+    .orderAction {
+        grid-column: 1 / -1;
+    }
+
+
+    .view-btn {
+        display: block;
+        width: 100%;
+
+        text-align: center;
+
+        padding: 10px 15px;
+
+        box-sizing: border-box;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .sidebar {
+        display: block;
+        padding: 15px;
+    }
+
+
+    .sidebar h2 {
+        text-align: center;
+        margin-bottom: 12px;
+    }
+
+
+    .sidebar ul {
+        justify-content: center;
+
+        flex-wrap: wrap;
+    }
+
+
+    .sidebar li {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+
+
+    .dashboard-content {
+        padding: 20px 15px;
+    }
+
+
+    .dashboard-content h1 {
+        font-size: 26px;
+    }
+
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+
+    .card {
+        padding: 18px 12px;
+    }
+
+
+    .card h2 {
+        font-size: 26px;
+    }
+
+
+    .orders {
+        padding: 18px 14px;
+    }
+
+
+    .order-item {
+        grid-template-columns: 1fr;
+    }
+
+
+    .order-item > .status {
+        justify-self: start;
+    }
+
+
+    .orderAction {
+        width: 100%;
+    }
+
+}
+
+.view-btn {
+
+    background: #2563eb;
+
+    color: white;
+
+    padding: 12px 25px;
+
+    border-radius: 25px;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+
+}
+
+
+.view-btn:hover {
+
+    background: #1d4ed8;
+
+    transform: translateY(-2px);
+
+}
+
+.sidebar ul li a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.sidebar ul li a:visited {
+    color: inherit;
+}
+
+.sidebar ul li a:hover {
+    color: inherit;
+    text-decoration: none;
+}

@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NadiGo Orders</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+
+</head>
+
+
+<body>
+
+
+<nav class="navbar">
+
+    <div class="nav-container">
+
+        <div class="logo">
+            Nadi<span>Go</span>
+        </div>
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="../index.html">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="orders.html">
+                    Orders
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    Customers
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    Settings
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+</nav>
+
+
+
+<section class="dashboard">
+
+
+    <div class="sidebar">
+
+
+        <h2>
+            Nadi<span>Go</span>
+        </h2>
+
+
+        <ul>
+
+            <li>
+    <a href="./dashboard.html">Dashboard</a>
+</li>
+
+
+            <li class="active">
+                Orders
+            </li>
+
+
+            <li>
+                Customers
+            </li>
+
+
+            <li>
+                Settings
+            </li>
+
+        </ul>
+
+
+    </div>
+
+
+
+    <div class="dashboard-content">
+
+
+        <h1>
+            Orders
+        </h1>
+
+
+        <div class="orders">
+
+
+            <h2>
+                All Orders
+            </h2>
+
+
+            <div id="ordersContainer">
+
+                <!-- Semua order daripada database akan masuk sini -->
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<script src="../js/script.js"></script>
+
+
+<script>
+
+    loadOrders();
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,502 @@
+/* =====================
+   NADIGO HOME DESIGN
+===================== */
+
+
+/* NAVBAR */
+.navbar {
+
+    background: white;
+
+    padding: 18px 0;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 10;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+
+}
+
+
+
+.nav-container {
+
+    width: 90%;
+
+    max-width: 1400px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.logo {
+
+    font-size: 32px;
+
+    font-weight: 800;
+
+    color: #2563eb;
+
+}
+
+
+.logo span {
+
+    color:#1d4ed8;
+
+}
+
+
+
+.nav-links a {
+
+    text-decoration:none;
+
+    color:#334155;
+
+    font-weight:600;
+
+    padding:8px 0;
+
+    position:relative;
+
+}
+
+
+
+.nav-links a:hover {
+
+    color:#2563eb;
+
+}
+
+
+
+.nav-links li {
+
+    display:inline-flex;
+
+    align-items:center;
+
+}
+
+
+
+.nav-button {
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 30px;
+
+    border-radius:30px;
+
+    cursor:pointer;
+
+}
+
+
+
+
+
+/* HERO */
+
+
+.hero {
+
+    min-height:85vh;
+
+    width:90%;
+
+    max-width:1200px;
+
+    margin:auto;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:50px;
+
+}
+
+
+
+.hero-text {
+
+    max-width:600px;
+
+}
+
+
+
+.tag {
+
+    color:#2563eb;
+
+    font-weight:bold;
+
+}
+
+
+
+.hero h1 {
+
+    font-size:65px;
+
+    line-height:1.1;
+
+    color:#0f172a;
+
+    margin:20px 0;
+
+}
+
+
+
+.hero p {
+
+    font-size:20px;
+
+    color:#64748b;
+
+}
+
+
+
+.hero-btn {
+
+    margin-top:35px;
+
+}
+
+
+
+.hero-btn a {
+
+    text-decoration:none;
+
+}
+
+
+
+.hero-btn button {
+
+    padding:15px 35px;
+
+    border-radius:30px;
+
+    border:none;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:17px;
+
+    cursor:pointer;
+
+    margin-right:15px;
+
+}
+
+
+
+.hero-btn .outline {
+
+    background:white;
+
+    color:#2563eb;
+
+    border:2px solid #2563eb;
+
+}
+
+
+
+
+
+/* HERO CARD */
+
+
+.hero-card {
+
+    width:350px;
+
+    height:350px;
+
+    background:#dbeafe;
+
+    border-radius:40px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+
+.laundry-box {
+
+    background:white;
+
+    width:230px;
+
+    padding:40px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    box-shadow:0 15px 40px rgba(0,0,0,0.1);
+
+    font-size:40px;
+
+}
+
+
+
+.laundry-box h3 {
+
+    font-size:22px;
+
+    margin-top:20px;
+
+}
+
+
+
+
+
+/* SERVICES */
+
+
+.services {
+
+    padding:80px 10%;
+
+    text-align:center;
+
+}
+
+
+
+.services h2,
+.how h2,
+.partner h2 {
+
+    font-size:40px;
+
+    color:#0f172a;
+
+    margin-bottom:40px;
+
+}
+
+
+
+.service-grid {
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:30px;
+
+}
+
+
+
+.service-card {
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:25px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+}
+
+
+
+.service-card h3 {
+
+    color:#2563eb;
+
+}
+
+
+
+
+
+/* HOW */
+
+
+.how {
+
+    padding:80px 10%;
+
+    background:#eff6ff;
+
+    text-align:center;
+
+}
+
+
+
+.steps {
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:25px;
+
+}
+
+
+
+.steps div {
+
+    background:white;
+
+    padding:30px;
+
+    width:180px;
+
+    border-radius:20px;
+
+    font-size:22px;
+
+    color:#2563eb;
+
+    font-weight:bold;
+
+}
+
+
+
+
+
+/* PARTNER */
+
+
+.partner {
+
+    padding:80px 20px;
+
+    text-align:center;
+
+}
+
+
+
+.partner p {
+
+    font-size:20px;
+
+    color:#64748b;
+
+}
+
+
+
+
+
+/* FOOTER */
+
+
+footer {
+
+    background:#1e3a8a;
+
+    color:white;
+
+    text-align:center;
+
+    padding:40px;
+
+}
+
+
+
+
+
+/* MOBILE */
+
+
+/* @media(max-width:900px){ 
+
+
+.hero {
+
+    flex-direction:column;
+
+    text-align:left;
+
+    align-items:flex-start;
+
+}
+
+
+
+.hero h1 {
+
+    font-size:38px;
+
+}
+
+
+
+.hero p {
+
+    text-align:left;
+
+}
+
+
+
+.service-grid {
+
+    grid-template-columns:1fr;
+
+}
+
+
+
+.steps {
+
+    flex-direction:column;
+
+}
+
+
+
+.nav-links {
+
+    display:none;
+
+}
+
+
+} */

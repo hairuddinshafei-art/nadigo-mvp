@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NadiGo Track Order</title>
+
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" href="../css/home.css">
+
+    <link rel="stylesheet" href="../css/tracking.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+
+            <div class="logo">
+
+                Nadi<span>Go</span>
+
+            </div>
+
+
+            <ul class="nav-links">
+
+
+                <li>
+
+                    <a href="../index.html">
+                        Home
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a href="booking.html">
+                        Book Laundry
+                    </a>
+
+                </li>
+
+
+            </ul>
+
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         TRACK ORDER SECTION
+    ========================== -->
+
+    <section class="track-order-page">
+
+
+        <div class="track-order-card">
+
+
+            <h1>
+                Track Your Order
+            </h1>
+
+
+            <p>
+                Enter your NadiGo Order ID
+                to check your laundry status.
+            </p>
+
+
+
+            <!-- =========================
+                 ORDER ID SEARCH
+            ========================== -->
+
+            <div class="track-order-search">
+
+
+                <input type="text" id="trackingInput" placeholder="Example: NDG-123456">
+
+
+                <button type="button" onclick="trackOrder()">
+                    Track Order
+                </button>
+
+
+            </div>
+
+
+
+            <!-- =========================
+                 ERROR MESSAGE
+            ========================== -->
+
+            <p id="trackingError"></p>
+
+
+
+            <!-- =========================
+                 ORDER RESULT
+            ========================== -->
+
+            <div id="trackingResult" style="display: none;">
+
+
+                <h2>
+                    Order Details
+                </h2>
+
+
+
+                <div class="info-row">
+
+                    <span>
+                        Order ID
+                    </span>
+
+                    <strong id="resultOrderID">
+                    </strong>
+
+                </div>
+
+
+
+                <div class="info-row">
+
+                    <span>
+                        Customer
+                    </span>
+
+                    <strong id="resultName">
+                    </strong>
+
+                </div>
+
+
+
+                <div class="info-row">
+
+                    <span>
+                        Service
+                    </span>
+
+                    <strong id="resultService">
+                    </strong>
+
+                </div>
+
+
+
+                <!-- ESTIMATED WEIGHT -->
+
+                <div class="info-row">
+
+                    <span>
+                        Estimated Weight
+                    </span>
+
+                    <strong id="resultEstimatedWeight">
+                    </strong>
+
+                </div>
+
+
+                <!-- ACTUAL WEIGHT -->
+
+                <div class="info-row">
+
+                    <span>
+                        Actual Weight
+                    </span>
+
+                    <strong id="resultActualWeight">
+                    </strong>
+
+                </div>
+
+
+                <!-- ESTIMATED PRICE -->
+
+                <div class="info-row">
+
+                    <span>
+                        Estimated Price
+                    </span>
+
+                    <strong id="resultEstimatedPrice">
+                    </strong>
+
+                </div>
+
+
+                <!-- ACTUAL PRICE -->
+
+                <div class="info-row">
+
+                    <span>
+                        Actual Price
+                    </span>
+
+                    <strong id="resultActualPrice">
+                    </strong>
+
+                </div>
+
+
+                <div class="tracking-status">
+
+                    <h3>
+                        Order Status
+                    </h3>
+
+
+                    <strong id="resultStatus">
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <script src="../js/script.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NadiGo Order Detail</title>
+
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" href="../css/home.css">
+
+    <link rel="stylesheet" href="../css/order-detail.css">
+
+
+</head>
+
+
+<body>
+
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+
+            <div class="logo">
+                Nadi<span>Go</span>
+            </div>
+
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="dashboard.html">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        Orders
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        Customers
+                    </a>
+                </li>
+
+
+            </ul>
+
+
+        </div>
+
+    </nav>
+
+
+    <section class="order-detail">
+
+
+        <div class="detail-card">
+
+
+            <h1>
+                Order Details
+            </h1>
+
+
+
+            <div class="info-section">
+
+                <h3>
+                    Customer Information
+                </h3>
+
+
+                <p>
+                    <strong>Name:</strong>
+                    <span id="detailName"></span>
+                </p>
+
+                <p>
+                    <strong>Phone:</strong>
+                    <span id="detailPhone"></span>
+                </p>
+
+                <p>
+                    <strong>Pickup Address:</strong>
+                    <span id="detailAddress"></span>
+                </p>
+
+
+            </div>
+
+
+
+
+            <div class="info-section">
+
+                <h3>
+                    Laundry Details
+                </h3>
+
+
+                <p>
+                    <strong>Service:</strong>
+                    <span id="detailService"></span>
+                </p>
+
+                <p>
+                    <strong>Estimated Weight:</strong>
+                    <span id="detailWeight"></span>
+                </p>
+
+                <p>
+                    <strong>Estimated Price:</strong>
+                    <span id="detailPrice"></span>
+                </p>
+
+                <div class="actual-price-section">
+
+                    <h3>
+                        Actual Final Price
+                    </h3>
+
+                    <p>
+                        <strong>Actual Weight:</strong>
+                    </p>
+
+                    <div class="actual-weight-input">
+                        <input type="number" id="actualWeight" step="0.1" min="0" placeholder="Contoh: 3.7"
+                            oninput="calculateActualPrice()">
+
+                        <span>kg</span>
+                    </div>
+
+
+                    <p>
+                        <strong>Actual Price:</strong>
+                    </p>
+
+                    <div class="actual-price-display">
+                        <span id="actualPrice">
+                            RM0.00
+                        </span>
+                    </div>
+
+
+                    <button type="button" onclick="saveActualPrice()" class="save-price-btn">
+                        Save Actual Price
+                    </button>
+
+                    <p id="actualSaveMessage" class="actual-save-message"></p>
+                    
+                </div>
+
+            </div>
+
+
+
+
+            <div class="info-section">
+
+                <h3>
+                    Order Status
+                </h3>
+
+
+                <p>
+                    <strong>Status:</strong>
+
+                    <span class="status" id="orderStatus">
+                        Booking Received
+                    </span>
+
+                </p>
+
+
+                <select id="statusSelect" onchange="updateStatus()">
+
+                    <option value="Booking Received">
+                        Booking Received
+                    </option>
+
+
+                    <option value="Pickup Scheduled">
+                        Pickup Scheduled
+                    </option>
+
+
+                    <option value="Laundry Processing">
+                        Laundry Processing
+                    </option>
+
+
+                    <option value="Ready for Delivery">
+                        Ready for Delivery
+                    </option>
+
+
+                    <option value="Delivered">
+                        Delivered
+                    </option>
+
+
+                </select>
+
+
+            </div>
+
+
+
+
+            <button onclick="acceptOrder()" id="acceptBtn">
+                Accept Order
+            </button>
+
+
+
+            <a href="dashboard.html" class="back-btn">
+                Back Dashboard
+            </a>
+
+
+
+        </div>
+
+
+    </section>
+
+
+    <script src="../js/script.js"></script>
+
+    <script>
+
+        console.log("DETAIL PAGE JALAN");
+
+
+        window.onload = function () {
+
+            console.log("CALL LOAD DETAIL");
+
+
+            console.log(typeof loadOrderDetail);
+
+
+            loadOrderDetail();
+
+        };
+
+    </script>
+
+</body>
+
+</html>
