@@ -3,6 +3,7 @@ const cors = require("cors");
 const db = require("./database");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+
 require("dotenv").config();
 
 const app = express();
@@ -513,10 +514,12 @@ app.put(
 // START SERVER
 // =========================
 
-app.listen(3000, function(){
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, function(){
 
     console.log(
-        "Server NadiGo jalan di port 3000"
+        "Server NadiGo jalan di port " + PORT
     );
 
 });
