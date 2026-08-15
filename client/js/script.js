@@ -1,4 +1,6 @@
 
+const API_URL = "https://nadigo-backend.onrender.com";
+
 console.log("NadiGo JS Connected");
 function updateOrder(button) {
     console.log("script masuk");
@@ -107,24 +109,24 @@ function updateStatus() {
 
 
 
-    fetch("http://localhost:3000/orders/" + orderID, {
+    fetch(API_URL + "/orders/" + orderID, {
 
 
         method: "PUT",
 
 
-       headers: {
+        headers: {
 
-    "Content-Type":
-        "application/json",
+            "Content-Type":
+                "application/json",
 
-    "Authorization":
-        "Bearer " +
-        localStorage.getItem(
-            "nadigoAdminToken"
-        )
+            "Authorization":
+                "Bearer " +
+                localStorage.getItem(
+                    "nadigoAdminToken"
+                )
 
-},
+        },
 
 
         body: JSON.stringify({
@@ -228,13 +230,6 @@ function saveBooking() {
 
     console.log("SAVE BOOKING DIPANGGIL");
 
-
-    event.preventDefault();
-
-    // =========================
-    // FORM VALIDATION
-    // =========================
-
     let name =
         document.getElementById("customerName").value.trim();
 
@@ -247,66 +242,37 @@ function saveBooking() {
     let pickupDate =
         document.getElementById("pickupDate").value.trim();
 
+    console.log("PICKUP DATE INPUT:", pickupDate);
 
-    // CHECK NAMA
     if (name === "") {
-
         alert("Sila masukkan nama anda.");
-
         document.getElementById("customerName").focus();
-
         return;
     }
 
-
-    // CHECK PHONE
     if (phone === "") {
-
         alert("Sila masukkan nombor telefon.");
-
         document.getElementById("customerPhone").focus();
-
         return;
-
     }
-
 
     if (!/^[0-9]{9,10}$/.test(phone)) {
-
         alert("Sila masukkan nombor telefon yang sah. Contoh: 123456789");
-
         document.getElementById("customerPhone").focus();
-
         return;
-
     }
 
-
-    // CHECK ADDRESS
     if (address === "") {
-
         alert("Sila masukkan alamat pickup.");
-
         document.getElementById("customerAddress").focus();
-
         return;
     }
 
-
-    // CHECK PICKUP DATE
     if (pickupDate === "") {
-
         alert("Sila pilih tarikh pickup.");
-
         document.getElementById("pickupDate").focus();
-
         return;
     }
-
-
-    // =========================
-    // BOOKING DATA
-    // =========================
 
     let bookingData = {
 
@@ -318,11 +284,14 @@ function saveBooking() {
 
         address: address,
 
-        service: document.getElementById("serviceSelect").value,
+        service:
+            document.getElementById("serviceSelect").value,
 
-        weight: document.getElementById("weightSlider").value,
+        weight:
+            document.getElementById("weightSlider").value,
 
-        price: calculateFinalPrice(),
+        price:
+            calculateFinalPrice(),
 
         pickupDate: pickupDate,
 
@@ -330,12 +299,11 @@ function saveBooking() {
 
     };
 
+    console.log("PICKUP DATE:", pickupDate);
+    console.log("BOOKING DATA:", bookingData);
 
-    // =========================
-    // SEND TO BACKEND
-    // =========================
 
-    fetch("http://localhost:3000/booking", {
+    fetch(API_URL + "/booking", {
 
         method: "POST",
 
@@ -347,42 +315,49 @@ function saveBooking() {
 
     })
 
+    .then(function(response) {
 
-        .then(response => {
+        console.log("RESPONSE STATUS:", response.status);
 
-            console.log("RESPONSE STATUS:", response.status);
+        if (!response.ok) {
+            throw new Error("Booking gagal dihantar ke server.");
+        }
 
-            return response.json();
+        return response.json();
 
-        })
+    })
 
+    .then(function(data) {
 
-        .then(data => {
-
-            console.log("Backend response:");
-            console.log(data);
-
-            localStorage.setItem(
-                "nadigoBooking",
-                JSON.stringify(bookingData)
-            );
-
-            console.log("SEBELUM REDIRECT");
-
-            window.location.href =
-                "/client/pages/confirmation.html";
+        console.log("BACKEND RESPONSE:", data);
 
 
-        })
+        localStorage.setItem(
+            "nadigoBooking",
+            JSON.stringify(bookingData)
+        );
 
 
-        .catch(error => {
+        console.log(
+            "DATA DISIMPAN:",
+            localStorage.getItem("nadigoBooking")
+        );
 
-            console.log(error);
 
-            alert("Backend error");
+        console.log("SEBELUM REDIRECT");
 
-        });
+
+        window.location.replace("confirmation.html");
+
+    })
+
+    .catch(function(error) {
+
+        console.error("BOOKING ERROR:", error);
+
+        alert("Booking gagal dihantar. Sila cuba lagi.");
+
+    });
 
 }
 
@@ -445,6 +420,8 @@ function loadBooking() {
 
         document.getElementById("confirmPrice").innerHTML = data.price;
 
+        document.getElementById("confirmPickupDate").innerHTML = data.pickupDate;
+
     }
 
 }
@@ -462,107 +439,94 @@ function loadTracking() {
     console.log("TRACK ID:", id);
 
 
+    fetch(API_URL + "/tracking/" + id)
 
-    fetch("http://localhost:3000/orders")
+        .then(response => {
 
+            if (!response.ok) {
+                throw new Error("Order tidak dijumpai");
+            }
 
-        .then(response => response.json())
+            return response.json();
 
+        })
 
-        .then(data => {
-
-
-            console.log("SEMUA ORDER:", data);
-
-
-
-            let order = data.find(function (item) {
-
-
-                return item.orderID == id;
-
-
-            });
-
-
+        .then(order => {
 
             console.log("ORDER TRACKING:", order);
 
 
-
-            if (order) {
-
-
-                document.getElementById("trackOrderID").innerHTML =
-                    order.orderID;
+            if (!order) {
+                return;
+            }
 
 
-                document.getElementById("trackName").innerHTML =
-                    order.name;
+            document.getElementById("trackOrderID").innerHTML =
+                order.orderID;
 
 
-                document.getElementById("trackService").innerHTML =
-                    order.service;
+            document.getElementById("trackName").innerHTML =
+                order.name;
 
 
-                document.getElementById("trackWeight").innerHTML =
-                    order.weight + "kg";
+            document.getElementById("trackService").innerHTML =
+                order.service;
 
 
-                document.getElementById("trackPrice").innerHTML =
-                    order.price;
-
-                // =========================
-                // ACTUAL WEIGHT & PRICE
-                // =========================
-
-                if (order.actualWeight) {
-
-                    document.getElementById("actualWeightRow").style.display =
-                        "flex";
-
-                    document.getElementById("trackActualWeight").innerHTML =
-                        order.actualWeight + "kg";
-
-                }
+            document.getElementById("trackWeight").innerHTML =
+                order.weight + "kg";
 
 
-                if (order.actualPrice) {
+            document.getElementById("trackPrice").innerHTML =
+                order.price;
 
-                    document.getElementById("actualPriceRow").style.display =
-                        "flex";
-
-                    document.getElementById("trackActualPrice").innerHTML =
-                        order.actualPrice;
-
-                }
+                document.getElementById("trackPickupDate").innerHTML =
+    order.pickupDate;
 
 
+            // =========================
+            // ACTUAL WEIGHT & PRICE
+            // =========================
 
-                console.log("STATUS TRACK:", order.status);
+            if (order.actualWeight) {
 
+                document.getElementById("actualWeightRow").style.display =
+                    "flex";
 
-
-                document.getElementById("trackStatus").innerHTML =
-                    order.status;
-
-
-
-                updateTimeline(order.status);
-
+                document.getElementById("trackActualWeight").innerHTML =
+                    order.actualWeight + "kg";
 
             }
 
+
+            if (order.actualPrice) {
+
+                document.getElementById("actualPriceRow").style.display =
+                    "flex";
+
+                document.getElementById("trackActualPrice").innerHTML =
+                    order.actualPrice;
+
+            }
+
+
+            console.log("STATUS TRACK:", order.status);
+
+
+            document.getElementById("trackStatus").innerHTML =
+                order.status;
+
+
+            updateTimeline(order.status);
 
         })
 
 
         .catch(error => {
 
-            console.log(error);
+            console.log("TRACKING ERROR:", error);
 
         });
-
 
 }
 
@@ -671,19 +635,19 @@ function loadOrderDetail() {
 
 
     const token =
-    localStorage.getItem("nadigoAdminToken");
+        localStorage.getItem("nadigoAdminToken");
 
 
-fetch("http://localhost:3000/orders", {
+    fetch(API_URL + "/orders", {
 
-    headers: {
+        headers: {
 
-        "Authorization":
-            "Bearer " + token
+            "Authorization":
+                "Bearer " + token
 
-    }
+        }
 
-})
+    })
 
 
         .then(response => response.json())
@@ -748,6 +712,9 @@ fetch("http://localhost:3000/orders", {
                 document.getElementById("detailPrice").innerHTML =
                     order.price;
 
+                    document.getElementById("detailPickupDate").innerHTML =
+    order.pickupDate;
+
                 // =========================
                 // ACTUAL WEIGHT & PRICE
                 // =========================
@@ -806,19 +773,19 @@ function loadOrders() {
     console.log("LOAD ORDERS JALAN");
 
     const token =
-    localStorage.getItem("nadigoAdminToken");
+        localStorage.getItem("nadigoAdminToken");
 
 
-fetch("http://localhost:3000/orders", {
+    fetch(API_URL + "/orders", {
 
-    headers: {
+        headers: {
 
-        "Authorization":
-            "Bearer " + token
+            "Authorization":
+                "Bearer " + token
 
-    }
+        }
 
-})
+    })
 
         .then(response => response.json())
 
@@ -857,9 +824,9 @@ fetch("http://localhost:3000/orders", {
 
                         <span class="status pending">
 
-                            ${order.status}
+    ${order.status}
 
-                        </span>
+</span>
 
 
                         <a
@@ -933,26 +900,25 @@ to right,
 
 }
 
-let pickupDate = document.getElementById("pickupDate");
+let pickupDateInput =
+    document.getElementById("pickupDate");
 
-
-if (pickupDate) {
+if (pickupDateInput) {
 
     let today = new Date();
 
-
     let year = today.getFullYear();
 
-    let month = String(today.getMonth() + 1).padStart(2, "0");
+    let month =
+        String(today.getMonth() + 1).padStart(2, "0");
 
-    let day = String(today.getDate()).padStart(2, "0");
+    let day =
+        String(today.getDate()).padStart(2, "0");
 
+    let minDate =
+        `${year}-${month}-${day}`;
 
-    let minDate = `${year}-${month}-${day}`;
-
-
-    pickupDate.min = minDate;
-
+    pickupDateInput.min = minDate;
 }
 
 console.log("flatpickr check:", typeof flatpickr);
@@ -971,12 +937,15 @@ if (document.getElementById("pickupDate")) {
 
 console.log("SCRIPT.JS LOADED");
 
-document.getElementById("weightSlider").addEventListener("input", function () {
+if (document.getElementById("weightSlider")) {
 
-    calculatePrice();
+    document.getElementById("weightSlider").addEventListener("input", function () {
 
-});
+        calculatePrice();
 
+    });
+
+}
 // =========================
 // ACTUAL PRICE CALCULATION
 // =========================
@@ -1102,25 +1071,26 @@ function saveActualPrice() {
 
 
     fetch(
-        "http://localhost:3000/orders/" +
-        orderID +
-        "/actual",
+    API_URL +
+    "/orders/" +
+    orderID +
+    "/actual",
         {
 
             method: "PUT",
 
             headers: {
 
-    "Content-Type":
-        "application/json",
+                "Content-Type":
+                    "application/json",
 
-    "Authorization":
-        "Bearer " +
-        localStorage.getItem(
-            "nadigoAdminToken"
-        )
+                "Authorization":
+                    "Bearer " +
+                    localStorage.getItem(
+                        "nadigoAdminToken"
+                    )
 
-},
+            },
 
 
             body: JSON.stringify({
@@ -1235,19 +1205,19 @@ function loadDashboardRecentOrders() {
     console.log("LOAD DASHBOARD RECENT ORDERS");
 
     const token =
-    localStorage.getItem("nadigoAdminToken");
+        localStorage.getItem("nadigoAdminToken");
 
 
-fetch("http://localhost:3000/orders", {
+    fetch(API_URL + "/orders", {
 
-    headers: {
+        headers: {
 
-        "Authorization":
-            "Bearer " + token
+            "Authorization":
+                "Bearer " + token
 
-    }
+        }
 
-})
+    })
 
         .then(response => response.json())
 
@@ -1265,11 +1235,8 @@ fetch("http://localhost:3000/orders", {
 
             // Hanya order baru
             const newOrders = data.filter(function (order) {
-
-                return order.status === "Booking Received";
-
-            });
-
+    return order.status === "Booking Received";
+});
 
             if (newOrders.length === 0) {
 
@@ -1344,19 +1311,19 @@ function loadDashboardStats() {
     console.log("LOAD DASHBOARD STATS");
 
     const token =
-    localStorage.getItem("nadigoAdminToken");
+        localStorage.getItem("nadigoAdminToken");
 
 
-fetch("http://localhost:3000/orders", {
+    fetch(API_URL + "/orders", {
 
-    headers: {
+        headers: {
 
-        "Authorization":
-            "Bearer " + token
+            "Authorization":
+                "Bearer " + token
 
-    }
+        }
 
-})
+    })
 
         .then(response => response.json())
 
@@ -1465,7 +1432,7 @@ function trackOrder() {
     // GET ORDERS
     // =========================
 
-    fetch("http://localhost:3000/orders")
+    fetch(API_URL + "/orders")
 
 
         .then(response => {
@@ -1608,5 +1575,47 @@ function trackOrder() {
                 "none";
 
         });
+
+}
+
+// =========================
+// NADIGO MOBILE MENU
+// =========================
+
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.querySelector(".nav-links");
+
+if (menuToggle && navLinks) {
+
+    menuToggle.addEventListener("click", function () {
+
+        navLinks.classList.toggle("active");
+
+        if (navLinks.classList.contains("active")) {
+
+            menuToggle.innerHTML = "✕";
+
+        } else {
+
+            menuToggle.innerHTML = "☰";
+
+        }
+
+    });
+
+
+    // Tutup menu bila tekan link
+
+    navLinks.querySelectorAll("a").forEach(function (link) {
+
+        link.addEventListener("click", function () {
+
+            navLinks.classList.remove("active");
+
+            menuToggle.innerHTML = "☰";
+
+        });
+
+    });
 
 }

@@ -83,7 +83,7 @@ function requireAdmin(req, res, next) {
 // HOME
 // =========================
 
-app.get("/orders", requireAdmin, function(req, res){
+app.get("/", function(req, res){
 
     res.send("NadiGo Backend Running");
 
@@ -255,7 +255,7 @@ app.post("/booking", function(req, res){
 // GET ALL ORDERS
 // =========================
 
-app.get("/orders", function(req, res){
+app.get("/orders",requireAdmin, function(req, res){
 
     try {
 
@@ -286,7 +286,56 @@ app.get("/orders", function(req, res){
 
 });
 
+// =========================
+// CUSTOMER TRACKING
+// =========================
 
+app.get("/tracking/:orderID", function(req, res) {
+
+    const orderID = req.params.orderID;
+
+    try {
+
+        const order = db.prepare(`
+            SELECT
+                orderID,
+                name,
+                phone,
+                address,
+                service,
+                weight,
+                pickupDate,
+                price,
+                actualWeight,
+                actualPrice,
+                status
+            FROM orders
+            WHERE orderID = ?
+        `).get(orderID);
+
+        if (!order) {
+
+            return res.status(404).json({
+                message: "Order tidak jumpa"
+            });
+
+        }
+
+        res.json(order);
+
+    }
+
+    catch(error) {
+
+        console.log("TRACKING ERROR:", error);
+
+        res.status(500).json({
+            message: "Gagal ambil tracking"
+        });
+
+    }
+
+});
 // =========================
 // UPDATE ORDER STATUS
 // =========================

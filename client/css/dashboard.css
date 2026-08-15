@@ -236,47 +236,71 @@
 
 /* STATUS */
 
+/* =========================
+   ORDER STATUS
+========================= */
 
-.order-item span {
+.order-item > .status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-    padding: 8px 18px;
+    padding: 8px 16px;
 
-    border-radius: 30px;
+    border-radius: 999px;
 
-    font-weight: bold;
+    font-size: 13px;
+    font-weight: 700;
 
-    font-size: 14px;
-
+    white-space: nowrap;
 }
 
 
+/* BOOKING RECEIVED */
 
 .pending {
-
     background: #fef3c7;
-
     color: #92400e;
-
 }
 
 
+/* LAUNDRY PROCESSING */
 
 .processing {
-
     background: #dbeafe;
-
     color: #1d4ed8;
-
 }
 
 
+/* READY FOR DELIVERY */
 
 .ready {
-
     background: #dcfce7;
-
     color: #166534;
+}
 
+
+/* DELIVERED */
+
+.delivered {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+
+/* OUT FOR DELIVERY */
+
+.out-for-delivery {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+
+/* CANCELLED */
+
+.cancelled {
+    background: #fee2e2;
+    color: #b91c1c;
 }
 
 

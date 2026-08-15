@@ -1,9 +1,12 @@
-/* =====================
+/* =========================
    NADIGO HOME DESIGN
-===================== */
+========================= */
 
 
-/* NAVBAR */
+/* =========================
+   NAVBAR
+========================= */
+
 .navbar {
 
     background: white;
@@ -16,10 +19,9 @@
 
     z-index: 10;
 
-    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    box-shadow: 5px 0 20px rgba(0,0,0,0.05);
 
 }
-
 
 
 .nav-container {
@@ -35,6 +37,8 @@
     align-items: center;
 
     justify-content: space-between;
+
+    position: relative;
 
 }
 
@@ -52,451 +56,1386 @@
 
 .logo span {
 
-    color:#1d4ed8;
+    color: #1d4ed8;
 
 }
 
 
+/* DESKTOP MENU */
 
-.nav-links a {
+.nav-links {
 
-    text-decoration:none;
+    display: flex;
 
-    color:#334155;
+    align-items: center;
 
-    font-weight:600;
+    gap: 35px;
 
-    padding:8px 0;
-
-    position:relative;
-
-}
-
-
-
-.nav-links a:hover {
-
-    color:#2563eb;
+    list-style: none;
 
 }
-
 
 
 .nav-links li {
 
-    display:inline-flex;
+    display: inline-flex;
 
-    align-items:center;
+    align-items: center;
 
 }
 
 
+.nav-links a {
+
+    text-decoration: none;
+
+    color: #334155;
+
+    font-weight: 600;
+
+    padding: 8px 0;
+
+    position: relative;
+
+}
+
+
+.nav-links a:hover {
+
+    color: #2563eb;
+
+}
+
+
+/* BOOK NOW */
 
 .nav-button {
 
-    background:#2563eb;
+    background: #2563eb;
 
-    color:white;
+    color: white;
 
-    border:none;
+    border: none;
 
-    padding:14px 30px;
+    padding: 14px 30px;
 
-    border-radius:30px;
+    border-radius: 30px;
 
-    cursor:pointer;
+    cursor: pointer;
+
+    font-weight: 600;
+
+    transition: 0.3s;
 
 }
 
 
+.nav-button:hover {
+
+    background: #1d4ed8;
+
+    transform: translateY(-2px);
+
+}
 
 
+/* MOBILE MENU BUTTON */
 
-/* HERO */
+.menu-toggle {
 
+    display: none;
+
+    background: none;
+
+    border: none;
+
+    font-size: 28px;
+
+    color: #2563eb;
+
+    cursor: pointer;
+
+}
+
+
+/* =========================
+   HERO
+========================= */
 
 .hero {
 
-    min-height:85vh;
+    min-height: 85vh;
 
-    width:90%;
+    width: 90%;
 
-    max-width:1200px;
+    max-width: 1200px;
 
-    margin:auto;
+    margin: auto;
 
-    display:flex;
+    display: flex;
 
-    align-items:center;
+    align-items: center;
 
-    justify-content:space-between;
+    justify-content: space-between;
 
-    gap:50px;
+    gap: 50px;
 
 }
-
 
 
 .hero-text {
 
-    max-width:600px;
+    max-width: 600px;
 
 }
-
 
 
 .tag {
 
-    color:#2563eb;
+    color: #2563eb;
 
-    font-weight:bold;
+    font-weight: bold;
 
 }
-
 
 
 .hero h1 {
 
-    font-size:65px;
+    font-size: 65px;
 
-    line-height:1.1;
+    line-height: 1.1;
 
-    color:#0f172a;
+    color: #0f172a;
 
-    margin:20px 0;
+    margin: 20px 0;
 
 }
-
 
 
 .hero p {
 
-    font-size:20px;
+    font-size: 20px;
 
-    color:#64748b;
+    color: #64748b;
 
 }
-
 
 
 .hero-btn {
 
-    margin-top:35px;
+    margin-top: 35px;
 
 }
-
 
 
 .hero-btn a {
 
-    text-decoration:none;
+    text-decoration: none;
 
 }
-
 
 
 .hero-btn button {
 
-    padding:15px 35px;
+    padding: 15px 35px;
 
-    border-radius:30px;
+    border-radius: 30px;
 
-    border:none;
+    border: none;
 
-    background:#2563eb;
+    background: #2563eb;
 
-    color:white;
+    color: white;
 
-    font-size:17px;
+    font-size: 17px;
 
-    cursor:pointer;
+    cursor: pointer;
 
-    margin-right:15px;
+    margin-right: 15px;
 
 }
-
 
 
 .hero-btn .outline {
 
-    background:white;
+    background: white;
 
-    color:#2563eb;
+    color: #2563eb;
 
-    border:2px solid #2563eb;
+    border: 2px solid #2563eb;
 
 }
 
 
-
-
-
-/* HERO CARD */
-
+/* =========================
+   HERO CARD
+========================= */
 
 .hero-card {
 
-    width:350px;
+    width: 350px;
 
-    height:350px;
+    height: 350px;
 
-    background:#dbeafe;
+    background: #dbeafe;
 
-    border-radius:40px;
+    border-radius: 40px;
 
-    display:flex;
+    display: flex;
 
-    justify-content:center;
+    justify-content: center;
 
-    align-items:center;
+    align-items: center;
 
 }
-
 
 
 .laundry-box {
 
-    background:white;
+    background: white;
 
-    width:230px;
+    width: 230px;
 
-    padding:40px;
+    padding: 40px;
 
-    border-radius:25px;
+    border-radius: 25px;
 
-    text-align:center;
+    text-align: center;
 
-    box-shadow:0 15px 40px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
 
-    font-size:40px;
+    font-size: 40px;
 
 }
-
 
 
 .laundry-box h3 {
 
-    font-size:22px;
+    font-size: 22px;
 
-    margin-top:20px;
+    margin-top: 20px;
 
 }
 
 
+.laundry-box p {
+
+    font-size: 15px;
+
+    color: #64748b;
+
+    margin-top: 8px;
+
+}
 
 
+/* =========================
+   TABLET / MOBILE HERO
+========================= */
 
-/* SERVICES */
+@media (max-width: 900px) {
 
+    .hero {
+
+        width: 92%;
+
+        min-height: auto;
+
+        padding: 70px 0;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        justify-content: center;
+
+        text-align: center;
+
+        gap: 45px;
+
+    }
+
+
+    .hero-text {
+
+        width: 100%;
+
+        max-width: 600px;
+
+    }
+
+
+    .tag {
+
+        font-size: 14px;
+
+        margin-bottom: 5px;
+
+    }
+
+
+    .hero h1 {
+
+        font-size: clamp(40px, 10vw, 55px);
+
+        line-height: 1.1;
+
+        margin: 15px 0 20px;
+
+    }
+
+
+    .hero p {
+
+        font-size: 17px;
+
+        line-height: 1.6;
+
+        max-width: 540px;
+
+        margin-left: auto;
+
+        margin-right: auto;
+
+    }
+
+
+    /* BOOK PICKUP */
+
+    .hero-btn {
+
+        margin-top: 28px;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+    }
+
+
+    .hero-btn button {
+
+        width: 100%;
+
+        max-width: 280px;
+
+        padding: 14px 25px;
+
+        margin-right: 0;
+
+    }
+
+
+    /* HERO CARD */
+
+    .hero-card {
+
+        width: min(320px, 85vw);
+
+        height: min(320px, 85vw);
+
+        border-radius: 35px;
+
+    }
+
+
+    .laundry-box {
+
+        width: 65%;
+
+        padding: 30px 20px;
+
+        font-size: 35px;
+
+    }
+
+
+    .laundry-box h3 {
+
+        font-size: 19px;
+
+        margin-top: 15px;
+
+    }
+
+
+    .laundry-box p {
+
+        font-size: 14px;
+
+    }
+
+}
+
+
+/* =========================
+   SMALL PHONE
+========================= */
+
+@media (max-width: 480px) {
+
+    .hero {
+
+        width: 94%;
+
+        padding: 55px 0 65px;
+
+        gap: 35px;
+
+    }
+
+
+    .tag {
+
+        font-size: 13px;
+
+    }
+
+
+    .hero h1 {
+
+        font-size: 38px;
+
+        line-height: 1.08;
+
+        margin: 12px 0 18px;
+
+    }
+
+
+    .hero p {
+
+        font-size: 16px;
+
+        line-height: 1.55;
+
+    }
+
+
+    .hero-btn {
+
+        margin-top: 24px;
+
+    }
+
+
+    .hero-btn button {
+
+        max-width: 260px;
+
+        padding: 13px 22px;
+
+        font-size: 16px;
+
+    }
+
+
+    .hero-card {
+
+        width: 270px;
+
+        height: 270px;
+
+        border-radius: 30px;
+
+    }
+
+
+    .laundry-box {
+
+        width: 68%;
+
+        padding: 25px 15px;
+
+        font-size: 30px;
+
+    }
+
+
+    .laundry-box h3 {
+
+        font-size: 17px;
+
+        margin-top: 12px;
+
+    }
+
+
+    .laundry-box p {
+
+        font-size: 13px;
+
+    }
+
+}
+
+
+/* =========================
+   SERVICES
+========================= */
 
 .services {
 
-    padding:80px 10%;
+    padding: 90px 10%;
 
-    text-align:center;
-
-}
-
-
-
-.services h2,
-.how h2,
-.partner h2 {
-
-    font-size:40px;
-
-    color:#0f172a;
-
-    margin-bottom:40px;
+    text-align: center;
 
 }
 
+
+.services h2 {
+
+    font-size: 42px;
+
+    color: #0f172a;
+
+    margin-bottom: 15px;
+
+}
 
 
 .service-grid {
 
-    display:grid;
+    display: grid;
 
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns: repeat(3,1fr);
 
-    gap:30px;
+    gap: 30px;
+
+    margin-top: 40px;
 
 }
-
 
 
 .service-card {
 
-    background:white;
+    background: white;
 
-    padding:35px;
+    padding: 35px 30px;
 
-    border-radius:25px;
+    border-radius: 24px;
 
-    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.06);
 
+    transition: 0.25s ease;
 }
 
+
+.service-card:hover {
+
+    transform: translateY(-6px);
+
+    box-shadow: 0 18px 40px rgba(37,99,235,0.12);
+
+}
 
 
 .service-card h3 {
 
-    color:#2563eb;
+    color: #2563eb;
+
+    font-size: 24px;
+
+    margin-bottom: 12px;
 
 }
 
 
+.service-card p {
+
+    color: #64748b;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
 
 
+/* =========================
+   TABLET
+========================= */
 
-/* HOW */
+@media (max-width:900px){
 
+    .services{
+
+        padding:70px 6%;
+
+    }
+
+
+    .services h2{
+
+        font-size:34px;
+
+    }
+
+
+    .service-grid{
+
+        grid-template-columns:1fr;
+
+        gap:18px;
+
+    }
+
+
+    .service-card{
+
+        padding:30px 24px;
+
+        text-align:left;
+
+        display:flex;
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+
+    .service-card h3{
+
+        font-size:22px;
+
+    }
+
+
+    .service-card p{
+
+        font-size:15px;
+
+    }
+
+}
+
+
+/* =========================
+   SMALL PHONE
+========================= */
+
+@media (max-width:480px){
+
+    .services{
+
+        padding:60px 5%;
+
+    }
+
+
+    .services h2{
+
+        font-size:30px;
+
+    }
+
+
+    .service-card{
+
+        padding:24px 18px;
+
+        border-radius:20px;
+
+    }
+
+
+    .service-card h3{
+
+        font-size:20px;
+
+    }
+
+
+    .service-card p{
+
+        font-size:14px;
+
+    }
+
+}
+
+/* =========================
+   HOW IT WORKS
+========================= */
 
 .how {
 
-    padding:80px 10%;
+    padding: 90px 10%;
 
-    background:#eff6ff;
+    background: #eff6ff;
 
-    text-align:center;
+    text-align: center;
 
 }
 
+
+.how h2 {
+
+    font-size: 42px;
+
+    color: #0f172a;
+
+    margin-bottom: 45px;
+
+}
 
 
 .steps {
 
-    display:flex;
+    display: flex;
 
-    justify-content:center;
+    justify-content: center;
 
-    gap:25px;
+    align-items: center;
+
+    gap: 25px;
 
 }
-
 
 
 .steps div {
 
-    background:white;
+    background: white;
 
-    padding:30px;
+    padding: 30px 20px;
 
-    width:180px;
+    width: 180px;
 
-    border-radius:20px;
+    min-height: 130px;
 
-    font-size:22px;
+    border-radius: 22px;
 
-    color:#2563eb;
+    font-size: 22px;
 
-    font-weight:bold;
+    color: #2563eb;
 
-}
+    font-weight: bold;
 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
 
+    display: flex;
 
+    flex-direction: column;
 
+    justify-content: center;
 
-/* PARTNER */
+    align-items: center;
 
-
-.partner {
-
-    padding:80px 20px;
-
-    text-align:center;
-
-}
-
-
-
-.partner p {
-
-    font-size:20px;
-
-    color:#64748b;
+    transition: 0.25s ease;
 
 }
 
 
+.steps div:hover {
+
+    transform: translateY(-6px);
+
+    box-shadow: 0 18px 35px rgba(37,99,235,0.12);
+
+}
 
 
+/* =========================
+   TABLET / MOBILE
+========================= */
 
-/* FOOTER */
+@media (max-width: 900px) {
 
+    .how {
+
+        padding: 70px 6%;
+
+    }
+
+
+    .how h2 {
+
+        font-size: 34px;
+
+        margin-bottom: 30px;
+
+    }
+
+
+    .steps {
+
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+
+        max-width: 420px;
+
+        margin: auto;
+
+    }
+
+
+    .steps div {
+
+        width: 100%;
+
+        min-height: 105px;
+
+        padding: 22px;
+
+        border-radius: 18px;
+
+        font-size: 20px;
+
+    }
+
+}
+
+
+/* =========================
+   SMALL PHONE
+========================= */
+
+@media (max-width: 480px) {
+
+    .how {
+
+        padding: 60px 5%;
+
+    }
+
+
+    .how h2 {
+
+        font-size: 29px;
+
+        margin-bottom: 25px;
+
+    }
+
+
+    .steps {
+
+        gap: 12px;
+
+    }
+
+
+    .steps div {
+
+        min-height: 95px;
+
+        padding: 18px;
+
+        font-size: 18px;
+
+    }
+
+}
+
+/* =========================
+   FOOTER
+========================= */
 
 footer {
 
-    background:#1e3a8a;
+    background: #1e3a8a;
 
-    color:white;
+    color: white;
 
-    text-align:center;
+    text-align: center;
 
-    padding:40px;
-
-}
-
-
-
-
-
-/* MOBILE */
-
-
-/* @media(max-width:900px){ 
-
-
-.hero {
-
-    flex-direction:column;
-
-    text-align:left;
-
-    align-items:flex-start;
+    padding: 40px;
 
 }
 
 
+/* =========================
+   MOBILE
+========================= */
 
-.hero h1 {
+@media (max-width: 900px) {
 
-    font-size:38px;
+
+    /* NAVBAR */
+
+    .navbar {
+
+        padding: 14px 0;
+
+    }
+
+
+    .nav-container {
+
+        width: 92%;
+
+        position: relative;
+
+    }
+
+
+    .logo {
+
+        font-size: 27px;
+
+    }
+
+
+    /* HIDE DESKTOP LINKS */
+
+    .nav-links {
+
+        display: none;
+
+        position: absolute;
+
+        top: calc(100% + 10px);
+
+        left: 0;
+
+        right: 0;
+
+        background: white;
+
+        padding: 20px;
+
+        border-radius: 16px;
+
+        box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 5px;
+
+        z-index: 20;
+
+    }
+
+
+    /* MENU OPEN */
+
+    .nav-links.active {
+
+        display: flex;
+
+    }
+
+
+    .nav-links li {
+
+        display: block;
+
+        width: 100%;
+
+    }
+
+
+    .nav-links a {
+
+        display: block;
+
+        width: 100%;
+
+        padding: 12px 10px;
+
+        border-radius: 10px;
+
+    }
+
+
+    .nav-links a:hover {
+
+        background: #eff6ff;
+
+        color: #2563eb;
+
+    }
+
+
+    /* HAMBURGER */
+
+    .menu-toggle {
+
+        display: block;
+
+        margin-left: auto;
+
+        margin-right: 15px;
+
+        background: none;
+
+        border: none;
+
+        font-size: 28px;
+
+        color: #2563eb;
+
+        cursor: pointer;
+
+    }
+
+
+    /* BOOK NOW */
+
+    .nav-button {
+
+        padding: 11px 20px;
+
+        font-size: 14px;
+
+    }
+
+
+    /* HERO */
+
+    .hero {
+
+        width: 92%;
+
+        min-height: auto;
+
+        padding: 70px 0;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        justify-content: center;
+
+        text-align: center;
+
+        gap: 45px;
+
+    }
+
+
+    .hero-text {
+
+        max-width: 100%;
+
+    }
+
+
+    .tag {
+
+        font-size: 14px;
+
+    }
+
+
+    .hero h1 {
+
+        font-size: clamp(40px, 10vw, 55px);
+
+        line-height: 1.1;
+
+        margin: 15px 0;
+
+    }
+
+
+    .hero p {
+
+        font-size: 17px;
+
+        line-height: 1.6;
+
+        max-width: 500px;
+
+        margin: auto;
+
+    }
+
+
+    /* HERO BUTTONS */
+
+    .hero-btn {
+
+        margin-top: 28px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 12px;
+
+    }
+
+
+    .hero-btn button {
+
+        width: 100%;
+
+        max-width: 280px;
+
+        margin-right: 0;
+
+        padding: 14px 25px;
+
+    }
+
+
+    /* HERO CARD */
+
+    .hero-card {
+
+        width: min(320px, 85vw);
+
+        height: min(320px, 85vw);
+
+        border-radius: 35px;
+
+    }
+
+
+    .laundry-box {
+
+        width: 65%;
+
+        padding: 30px 20px;
+
+        font-size: 35px;
+
+    }
+
+
+    .laundry-box h3 {
+
+        font-size: 19px;
+
+        margin-top: 15px;
+
+    }
+
+
+    /* SERVICES */
+
+    .services {
+
+        padding: 65px 6%;
+
+    }
+
+
+    .services h2,
+    .how h2,
+    .partner h2 {
+
+        font-size: 32px;
+
+        margin-bottom: 30px;
+
+    }
+
+
+    .service-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+
+    }
+
+
+    .service-card {
+
+        padding: 28px 22px;
+
+        border-radius: 20px;
+
+    }
+
+
+    /* HOW IT WORKS */
+
+    .how {
+
+        padding: 65px 6%;
+
+    }
+
+
+    .steps {
+
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+
+        align-items: center;
+
+    }
+
+
+    .steps div {
+
+        width: 100%;
+
+        padding: 25px 20px;
+
+        border-radius: 18px;
+
+        font-size: 19px;
+
+    }
+
+
+    /* PARTNER */
+
+    .partner {
+
+        padding: 65px 6%;
+
+    }
+
+
+    .partner p {
+
+        font-size: 17px;
+
+    }
+
+
+    /* FOOTER */
+
+    footer {
+
+        padding: 30px 20px;
+
+        font-size: 14px;
+
+    }
 
 }
 
 
+/* =========================
+   SMALL PHONE
+========================= */
 
-.hero p {
+@media (max-width: 480px) {
 
-    text-align:left;
+
+    .navbar {
+
+        padding: 12px 0;
+
+    }
+
+
+    .nav-container {
+
+        width: 94%;
+
+    }
+
+
+    .logo {
+
+        font-size: 24px;
+
+    }
+
+
+    .menu-toggle {
+
+        font-size: 25px;
+
+        margin-right: 10px;
+
+    }
+
+
+    .nav-button {
+
+        padding: 10px 16px;
+
+        font-size: 13px;
+
+    }
+
+
+    /* HERO */
+
+    .hero {
+
+        width: 94%;
+
+        padding: 55px 0 65px;
+
+        gap: 35px;
+
+    }
+
+
+    .hero h1 {
+
+        font-size: 38px;
+
+    }
+
+
+    .hero p {
+
+        font-size: 16px;
+
+    }
+
+
+    .hero-card {
+
+        width: 270px;
+
+        height: 270px;
+
+        border-radius: 30px;
+
+    }
+
+
+    .laundry-box {
+
+        width: 68%;
+
+        padding: 25px 15px;
+
+        font-size: 30px;
+
+    }
+
+
+    .laundry-box h3 {
+
+        font-size: 17px;
+
+    }
+
+
+    /* SERVICES */
+
+    .services h2,
+    .how h2,
+    .partner h2 {
+
+        font-size: 28px;
+
+    }
+
+
+    .service-card {
+
+        padding: 24px 18px;
+
+    }
 
 }
-
-
-
-.service-grid {
-
-    grid-template-columns:1fr;
-
-}
-
-
-
-.steps {
-
-    flex-direction:column;
-
-}
-
-
-
-.nav-links {
-
-    display:none;
-
-}
-
-
-} */

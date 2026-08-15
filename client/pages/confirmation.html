@@ -19,7 +19,7 @@
 
 </head>
 
-
+<body>
 <nav class="navbar">
 
 <div class="nav-container">
@@ -160,6 +160,11 @@ Laundry Details
 <span id="confirmPrice"></span>
 </p>
 
+<p>
+<strong>Pickup Date:</strong>
+<span id="confirmPickupDate"></span>
+</p>
+
 
 </div>
 
@@ -192,57 +197,46 @@ let bookingData = JSON.parse(
     localStorage.getItem("nadigoBooking")
 );
 
-
 console.log("CONFIRMATION DATA:", bookingData);
 
-
-if(bookingData){
-
+if (bookingData) {
 
     document.getElementById("confirmOrderID").innerHTML =
-    bookingData.orderID;
-
+        bookingData.orderID;
 
     document.getElementById("confirmName").innerHTML =
-    bookingData.name;
-
+        bookingData.name;
 
     document.getElementById("confirmPhone").innerHTML =
-    bookingData.phone;
-
+        bookingData.phone;
 
     document.getElementById("confirmAddress").innerHTML =
-    bookingData.address;
-
+        bookingData.address;
 
     document.getElementById("confirmService").innerHTML =
-    bookingData.service;
-
+        bookingData.service;
 
     document.getElementById("confirmWeight").innerHTML =
-    bookingData.weight + "kg";
-
+        bookingData.weight + "kg";
 
     document.getElementById("confirmPrice").innerHTML =
-    bookingData.price;
+        bookingData.price;
 
-
+    document.getElementById("confirmPickupDate").innerHTML =
+        bookingData.pickupDate;
 
     document.getElementById("trackOrderBtn").href =
-    "tracking.html?id=" + bookingData.orderID;
-
+        "tracking.html?id=" + bookingData.orderID;
 
 }
 
-else{
+else {
 
     console.log("TIADA DATA BOOKING");
 
 }
 
-
 </script>
-
 </body>
 
 </html>
