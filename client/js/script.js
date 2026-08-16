@@ -1394,7 +1394,6 @@ function trackOrder() {
 
     console.log("TRACK ORDER JALAN");
 
-
     const input =
         document.getElementById("trackingInput");
 
@@ -1403,7 +1402,6 @@ function trackOrder() {
 
     const result =
         document.getElementById("trackingResult");
-
 
     const orderID =
         input.value.trim();
@@ -1421,7 +1419,6 @@ function trackOrder() {
         result.style.display = "none";
 
         return;
-
     }
 
 
@@ -1429,48 +1426,36 @@ function trackOrder() {
 
 
     // =========================
-    // GET ORDERS
+    // GET ORDER
     // =========================
-fetch(
-    API_URL + "/tracking/" +
-    encodeURIComponent(orderID)
-)
+
+    fetch(
+        API_URL + "/tracking/" +
+        encodeURIComponent(orderID)
+    )
 
         .then(response => {
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Order tidak dijumpai."
+                );
+
+            }
 
             return response.json();
 
         })
 
 
-        .then(data => {
-
+        .then(order => {
 
             console.log(
-                "ALL ORDERS:",
-                data
+                "ORDER:",
+                order
             );
 
-
-            // =========================
-            // FIND ORDER
-            // =========================
-
-            .then(order => {
-
-    console.log("ORDER:", order);
-
-    if (!order) {
-
-        error.innerHTML =
-            "Order ID tidak dijumpai.";
-
-        result.style.display =
-            "none";
-
-        return;
-
-    }
 
             // =========================
             // ORDER NOT FOUND
@@ -1558,6 +1543,10 @@ fetch(
                     : "Pending";
 
 
+            // =========================
+            // STATUS
+            // =========================
+
             document.getElementById(
                 "resultStatus"
             ).innerHTML =
@@ -1568,17 +1557,18 @@ fetch(
             result.style.display =
                 "block";
 
-
         })
 
 
         .catch(error => {
 
-            console.log(error);
-
+            console.log(
+                "TRACKING ERROR:",
+                error
+            );
 
             error.innerHTML =
-                "Tidak dapat sambung ke server.";
+                "Order ID tidak dijumpai.";
 
             result.style.display =
                 "none";
