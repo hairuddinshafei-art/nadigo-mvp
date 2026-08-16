@@ -1431,9 +1431,10 @@ function trackOrder() {
     // =========================
     // GET ORDERS
     // =========================
-
-    fetch(API_URL + "/orders")
-
+fetch(
+    API_URL + "/tracking/" +
+    encodeURIComponent(orderID)
+)
 
         .then(response => {
 
@@ -1455,13 +1456,21 @@ function trackOrder() {
             // FIND ORDER
             // =========================
 
-            const order =
-                data.find(function (item) {
+            .then(order => {
 
-                    return item.orderID === orderID;
+    console.log("ORDER:", order);
 
-                });
+    if (!order) {
 
+        error.innerHTML =
+            "Order ID tidak dijumpai.";
+
+        result.style.display =
+            "none";
+
+        return;
+
+    }
 
             // =========================
             // ORDER NOT FOUND
