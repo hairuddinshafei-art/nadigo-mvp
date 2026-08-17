@@ -183,63 +183,71 @@ app.post("/admin/login", async function(req, res){
 // CREATE BOOKING
 // =========================
 
-app.post("/booking", function(req, res){
+app.post("/booking", async function(req, res) {
 
     const booking = req.body;
 
-
     try {
 
-        const insert = db.prepare(`
+        const result = await db.query(`
             INSERT INTO orders (
-                orderID,
+                "orderID",
                 name,
                 phone,
                 address,
                 service,
                 weight,
                 price,
-                pickupDate,
+                "pickupDate",
                 status
             )
 
             VALUES (
-                @orderID,
-                @name,
-                @phone,
-                @address,
-                @service,
-                @weight,
-                @price,
-                @pickupDate,
-                @status
+                $1,
+                $2,
+                $3,
+                $4,
+                $5,
+                $6,
+                $7,
+                $8,
+                $9
             )
-        `);
 
+            RETURNING *
+        `, [
 
-        insert.run(booking);
+            booking.orderID,
+            booking.name,
+            booking.phone,
+            booking.address,
+            booking.service,
+            booking.weight,
+            booking.price,
+            booking.pickupDate,
+            booking.status
 
+        ]);
 
         console.log("Booking baru:");
-        console.log(booking);
-
+        console.log(result.rows[0]);
 
         res.json({
 
             message: "Booking berjaya diterima",
 
-            data: booking
+            data: result.rows[0]
 
         });
 
-
     }
 
-    catch(error){
+    catch(error) {
 
-        console.log("DATABASE ERROR:");
-        console.log(error);
-
+        console.error(
+            "DATABASE ERROR:",
+            error
+        );
 
         res.status(500).json({
 
@@ -256,26 +264,26 @@ app.post("/booking", function(req, res){
 // GET ALL ORDERS
 // =========================
 
-app.get("/orders",requireAdmin, function(req, res){
+app.get("/orders", requireAdmin, async function(req, res) {
 
     try {
 
-        const orders = db.prepare(`
+        const result = await db.query(`
             SELECT *
             FROM orders
             ORDER BY id DESC
-        `).all();
+        `);
 
-
-        res.json(orders);
-
+        res.json(result.rows);
 
     }
 
-    catch(error){
+    catch(error) {
 
-        console.log(error);
-
+        console.error(
+            "GET ORDERS ERROR:",
+            error
+        );
 
         res.status(500).json({
 
@@ -291,128 +299,118 @@ app.get("/orders",requireAdmin, function(req, res){
 // CUSTOMER TRACKING
 // =========================
 
-app.get("/tracking/:orderID", function(req, res) {
+app.get("/tracking/:orderID", async function(req, res) {
 
     const orderID = req.params.orderID;
 
     try {
 
-        const order = db.prepare(`
+        const result = await db.query(`
             SELECT
-                orderID,
+                "orderID",
                 name,
                 phone,
                 address,
                 service,
                 weight,
-                pickupDate,
+                "pickupDate",
                 price,
-                actualWeight,
-                actualPrice,
+                "actualWeight",
+                "actualPrice",
                 status
             FROM orders
-            WHERE orderID = ?
-        `).get(orderID);
+            WHERE "orderID" = $1
+        `, [orderID]);
 
-        if (!order) {
+        if (result.rows.length === 0) {
 
             return res.status(404).json({
+
                 message: "Order tidak jumpa"
+
             });
 
         }
 
-        res.json(order);
+        res.json(result.rows[0]);
 
     }
 
     catch(error) {
 
-        console.log("TRACKING ERROR:", error);
+        console.error(
+            "TRACKING ERROR:",
+            error
+        );
 
         res.status(500).json({
+
             message: "Gagal ambil tracking"
+
         });
 
     }
 
 });
+
+
 // =========================
 // UPDATE ORDER STATUS
 // =========================
 
-app.put("/orders/:id", requireAdmin, function(req, res){
+app.put("/orders/:id", requireAdmin, async function(req, res) {
 
     console.log("PUT MASUK");
-
-    console.log(req.params.id);
-
-    console.log(req.body);
-
+    console.log("ORDER ID:", req.params.id);
+    console.log("BODY:", req.body);
 
     const id = req.params.id;
-
     const newStatus = req.body.status;
-
 
     try {
 
-        const update = db.prepare(`
+        const result = await db.query(`
             UPDATE orders
 
-            SET status = ?
+            SET status = $1
 
-            WHERE orderID = ?
-        `);
+            WHERE "orderID" = $2
 
-
-        const result = update.run(
+            RETURNING *
+        `, [
             newStatus,
             id
-        );
+        ]);
 
-
-        if(result.changes > 0){
-
-            const order = db.prepare(`
-                SELECT *
-                FROM orders
-                WHERE orderID = ?
-            `).get(id);
-
+        if (result.rows.length > 0) {
 
             console.log("Status updated:");
+            console.log(result.rows[0]);
 
-            console.log(order);
-
-
-            res.json({
+            return res.json({
 
                 message: "Status berjaya update",
 
-                data: order
+                data: result.rows[0]
 
             });
 
         }
 
-        else{
+        return res.status(404).json({
 
-            res.status(404).json({
+            message: "Order tidak jumpa"
 
-                message: "Order tidak jumpa"
-
-            });
-
-        }
-
+        });
 
     }
 
-    catch(error){
+    catch(error) {
 
-        console.log(error);
-
+        console.error(
+            "UPDATE STATUS ERROR:",
+            error
+        );
 
         res.status(500).json({
 
@@ -431,12 +429,15 @@ app.put("/orders/:id", requireAdmin, function(req, res){
 app.put(
     "/orders/:id/actual",
     requireAdmin,
-    function(req, res){
+    async function(req, res) {
 
     const id = req.params.id;
 
-    const actualWeight = req.body.actualWeight;
-    const actualPrice = req.body.actualPrice;
+    const actualWeight =
+        req.body.actualWeight;
+
+    const actualPrice =
+        req.body.actualPrice;
 
 
     console.log("ACTUAL ORDER UPDATE");
@@ -448,62 +449,61 @@ app.put(
 
     try {
 
-        const update = db.prepare(`
+        const result = await db.query(`
             UPDATE orders
 
             SET
-                actualWeight = ?,
-                actualPrice = ?
+                "actualWeight" = $1,
+                "actualPrice" = $2
 
-            WHERE orderID = ?
-        `);
+            WHERE "orderID" = $3
 
+            RETURNING *
+        `, [
 
-        const result = update.run(
             actualWeight,
             actualPrice,
             id
-        );
+
+        ]);
 
 
-        if(result.changes > 0){
+        if (result.rows.length > 0) {
 
-            const order = db.prepare(`
-                SELECT *
-                FROM orders
-                WHERE orderID = ?
-            `).get(id);
+            return res.json({
 
+                message:
+                    "Actual price berjaya disimpan",
 
-            res.json({
-
-                message: "Actual price berjaya disimpan",
-
-                data: order
+                data:
+                    result.rows[0]
 
             });
 
         }
 
-        else{
 
-            res.status(404).json({
+        return res.status(404).json({
 
-                message: "Order tidak jumpa"
+            message:
+                "Order tidak jumpa"
 
-            });
-
-        }
+        });
 
     }
 
-    catch(error){
+    catch(error) {
 
-        console.log(error);
+        console.error(
+            "ACTUAL UPDATE ERROR:",
+            error
+        );
+
 
         res.status(500).json({
 
-            message: "Gagal update actual price"
+            message:
+                "Gagal update actual price"
 
         });
 

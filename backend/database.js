@@ -1,74 +1,47 @@
-const Database = require("better-sqlite3");
+require("dotenv").config();
 
-const db = new Database("nadigo.db");
+const { Pool } = require("pg");
 
-db.prepare(`
-    CREATE TABLE IF NOT EXISTS orders (
+console.log(
+    "DATABASE HOST:",
+    process.env.DATABASE_URL
+        ? new URL(process.env.DATABASE_URL).host
+        : "DATABASE_URL TIADA"
+);
 
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
+});
 
-        orderID TEXT UNIQUE,
+async function testDatabase() {
 
-        name TEXT,
+    try {
 
-        phone TEXT,
+        const result = await pool.query(
+            "SELECT NOW()"
+        );
 
-        address TEXT,
+        console.log(
+            "NadiGo PostgreSQL Connected:",
+            result.rows[0]
+        );
 
-        service TEXT,
+    }
 
-        weight REAL,
+    catch (error) {
 
-        price TEXT,
+        console.error(
+            "POSTGRESQL CONNECTION ERROR:",
+            error
+        );
 
-        pickupDate TEXT,
-
-        status TEXT
-
-    )
-`).run();
-
-console.log("NadiGo Database Ready");
-
-// =========================
-// DATABASE MIGRATION
-// =========================
-
-try {
-
-    db.prepare(`
-        ALTER TABLE orders
-        ADD COLUMN actualWeight REAL
-    `).run();
-
-    console.log("actualWeight column added");
-
-}
-catch(error) {
-
-    if (!error.message.includes("duplicate column name")) {
-        console.log(error);
     }
 
 }
 
+testDatabase();
 
-try {
-
-    db.prepare(`
-        ALTER TABLE orders
-        ADD COLUMN actualPrice TEXT
-    `).run();
-
-    console.log("actualPrice column added");
-
-}
-catch(error) {
-
-    if (!error.message.includes("duplicate column name")) {
-        console.log(error);
-    }
-
-}
-
-module.exports = db;
+module.exports = pool;
