@@ -328,7 +328,166 @@
 
 }
 
+/* =========================
+   NADIGO HERO ANIMATION
+========================= */
 
+.hero-text .tag,
+.hero-text h1,
+.hero-text > p:not(.tag),
+.hero-text .hero-btn {
+
+    opacity: 0;
+
+    transform: translateY(22px);
+
+    animation: nadigoHeroIn 0.8s ease-out forwards;
+
+}
+
+
+/* TAG */
+
+.hero-text .tag {
+
+    animation-delay: 0.10s;
+
+}
+
+
+/* MAIN TITLE */
+
+.hero-text h1 {
+
+    animation-delay: 0.25s;
+
+}
+
+
+/* DESCRIPTION */
+
+.hero-text > p:not(.tag) {
+
+    animation-delay: 0.40s;
+
+}
+
+
+/* BUTTON */
+
+.hero-text .hero-btn {
+
+    animation-delay: 0.55s;
+
+}
+
+
+/* HERO CARD */
+
+.hero-card {
+
+    opacity: 0;
+
+    transform: translateX(30px);
+
+    animation:
+        nadigoCardIn 0.9s ease-out 0.25s forwards;
+
+}
+
+
+/* TEXT ANIMATION */
+
+@keyframes nadigoHeroIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(22px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* CARD ANIMATION */
+
+@keyframes nadigoCardIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateX(30px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateX(0);
+
+    }
+
+}
+
+
+/* Laundry box floating */
+
+.laundry-box {
+
+    animation:
+        laundryFloat 4s ease-in-out infinite;
+
+}
+
+
+@keyframes laundryFloat {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+
+/* Book Pickup hover */
+
+.hero-btn button {
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.hero-btn button:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.12);
+
+}
 /* =========================
    TABLET / MOBILE HERO
 ========================= */
