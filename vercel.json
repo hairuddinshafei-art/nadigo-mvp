@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/admin",
+      "destination": "/client/pages/admin-login.html"
+    }
+  ]
+}
