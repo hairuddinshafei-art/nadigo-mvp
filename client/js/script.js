@@ -230,6 +230,27 @@ function saveBooking() {
 
     console.log("SAVE BOOKING DIPANGGIL");
 
+    const submitButton =
+        document.querySelector(".continue-btn");
+
+
+    // =========================
+    // PREVENT DOUBLE SUBMIT
+    // =========================
+
+    if (
+        submitButton.disabled ||
+        sessionStorage.getItem("nadigoSubmitting") === "true"
+    ) {
+        console.log("BOOKING SEDANG DIHANTAR");
+        return;
+    }
+
+
+    // =========================
+    // GET CUSTOMER DATA
+    // =========================
+
     let name =
         document.getElementById("customerName").value.trim();
 
@@ -242,120 +263,306 @@ function saveBooking() {
     let pickupDate =
         document.getElementById("pickupDate").value.trim();
 
-    console.log("PICKUP DATE INPUT:", pickupDate);
+
+    console.log(
+        "PICKUP DATE INPUT:",
+        pickupDate
+    );
+
+
+    // =========================
+    // VALIDATION
+    // =========================
 
     if (name === "") {
+
         alert("Sila masukkan nama anda.");
-        document.getElementById("customerName").focus();
+
+        document
+            .getElementById("customerName")
+            .focus();
+
         return;
     }
+
 
     if (phone === "") {
+
         alert("Sila masukkan nombor telefon.");
-        document.getElementById("customerPhone").focus();
+
+        document
+            .getElementById("customerPhone")
+            .focus();
+
         return;
     }
+
 
     if (!/^[0-9]{9,10}$/.test(phone)) {
-        alert("Sila masukkan nombor telefon yang sah. Contoh: 123456789");
-        document.getElementById("customerPhone").focus();
+
+        alert(
+            "Sila masukkan nombor telefon yang sah. Contoh: 123456789"
+        );
+
+        document
+            .getElementById("customerPhone")
+            .focus();
+
         return;
     }
+
 
     if (address === "") {
+
         alert("Sila masukkan alamat pickup.");
-        document.getElementById("customerAddress").focus();
+
+        document
+            .getElementById("customerAddress")
+            .focus();
+
         return;
     }
 
+
     if (pickupDate === "") {
+
         alert("Sila pilih tarikh pickup.");
-        document.getElementById("pickupDate").focus();
+
+        document
+            .getElementById("pickupDate")
+            .focus();
+
         return;
     }
+
+
+    // =========================
+    // BOOKING DATA
+    // =========================
 
     let bookingData = {
 
-        orderID: "NDG-" + Date.now(),
+        orderID:
+            "NDG-" + Date.now(),
 
-        name: name,
+        name:
+            name,
 
-        phone: "+60" + phone,
+        phone:
+            "+60" + phone,
 
-        address: address,
+        address:
+            address,
 
         service:
-            document.getElementById("serviceSelect").value,
+            document
+                .getElementById("serviceSelect")
+                .value,
 
         weight:
-            document.getElementById("weightSlider").value,
+            document
+                .getElementById("weightSlider")
+                .value,
 
         price:
             calculateFinalPrice(),
 
-        pickupDate: pickupDate,
+        pickupDate:
+            pickupDate,
 
-        status: "Booking Received"
+        status:
+            "Booking Received"
 
     };
 
-    console.log("PICKUP DATE:", pickupDate);
-    console.log("BOOKING DATA:", bookingData);
+
+    console.log(
+        "BOOKING DATA:",
+        bookingData
+    );
 
 
-    fetch(API_URL + "/booking", {
+    // =========================
+    // LOCK BUTTON
+    // =========================
 
-        method: "POST",
+    sessionStorage.setItem(
+        "nadigoSubmitting",
+        "true"
+    );
 
-        headers: {
-            "Content-Type": "application/json"
-        },
 
-        body: JSON.stringify(bookingData)
+    submitButton.disabled = true;
 
-    })
+    submitButton.innerHTML =
+        "⏳ SUBMITTING BOOKING...";
+
+
+    // =========================
+    // SHOW SENDING MESSAGE
+    // =========================
+
+    let sendingMessage =
+        document.getElementById(
+            "bookingSendingMessage"
+        );
+
+
+    if (!sendingMessage) {
+
+        sendingMessage =
+            document.createElement("div");
+
+        sendingMessage.id =
+            "bookingSendingMessage";
+
+        sendingMessage.className =
+            "booking-sending-message";
+
+        submitButton.parentNode.appendChild(
+            sendingMessage
+        );
+
+    }
+
+
+    sendingMessage.innerHTML = `
+        <strong>
+            Please wait — your booking is being processed.
+        </strong>
+        Do not refresh this page or press the button again.
+    `;
+
+
+    // =========================
+    // SEND TO BACKEND
+    // =========================
+
+    fetch(
+        API_URL + "/booking",
+        {
+
+            method: "POST",
+
+            headers: {
+
+                "Content-Type":
+                    "application/json"
+
+            },
+
+            body:
+                JSON.stringify(
+                    bookingData
+                )
+
+        }
+    )
+
 
     .then(function(response) {
 
-        console.log("RESPONSE STATUS:", response.status);
+        console.log(
+            "RESPONSE STATUS:",
+            response.status
+        );
+
 
         if (!response.ok) {
-            throw new Error("Booking gagal dihantar ke server.");
+
+            throw new Error(
+                "Booking gagal dihantar ke server."
+            );
+
         }
+
 
         return response.json();
 
     })
 
+
     .then(function(data) {
 
-        console.log("BACKEND RESPONSE:", data);
+        console.log(
+            "BACKEND RESPONSE:",
+            data
+        );
 
+
+        // =========================
+        // SAVE BOOKING
+        // =========================
 
         localStorage.setItem(
+
             "nadigoBooking",
-            JSON.stringify(bookingData)
+
+            JSON.stringify(
+                bookingData
+            )
+
         );
 
 
         console.log(
             "DATA DISIMPAN:",
-            localStorage.getItem("nadigoBooking")
+            localStorage.getItem(
+                "nadigoBooking"
+            )
         );
 
 
-        console.log("SEBELUM REDIRECT");
+        // =========================
+        // REDIRECT
+        // =========================
+
+        console.log(
+            "SEBELUM REDIRECT"
+        );
 
 
-        window.location.replace("confirmation.html");
+        window.location.replace(
+            "confirmation.html"
+        );
 
     })
 
+
     .catch(function(error) {
 
-        console.error("BOOKING ERROR:", error);
+        console.error(
+            "BOOKING ERROR:",
+            error
+        );
 
-        alert("Booking gagal dihantar. Sila cuba lagi.");
+
+        // =========================
+        // UNLOCK IF FAILED
+        // =========================
+
+        sessionStorage.removeItem(
+            "nadigoSubmitting"
+        );
+
+
+        submitButton.disabled =
+            false;
+
+        submitButton.innerHTML =
+            "Continue Booking →";
+
+
+        if (sendingMessage) {
+
+            sendingMessage.remove();
+
+        }
+
+
+        alert(
+            "Booking gagal dihantar. Sila cuba lagi."
+        );
 
     });
 
@@ -669,6 +876,9 @@ function loadOrderDetail() {
 
 
             if (order) {
+
+                console.log("ACTUAL WEIGHT DARI DATABASE:", order.actualWeight);
+console.log("ACTUAL PRICE DARI DATABASE:", order.actualPrice);
 
 
                 localStorage.setItem(
