@@ -3,41 +3,15 @@ const cors = require("cors");
 const db = require("./database");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
 require("dotenv").config();
 
 const app = express();
 
-const emailTransporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
-    family: 4,
-    auth: {
-        user: process.env.NADIGO_EMAIL,
-        pass: process.env.NADIGO_EMAIL_APP_PASSWORD
-    }
-});
-
-emailTransporter.verify(function(error, success) {
-
-    if (error) {
-
-        console.error(
-            "EMAIL CONFIG ERROR:",
-            error
-        );
-
-    } else {
-
-        console.log(
-            "NADIGO EMAIL SERVER READY"
-        );
-
-    }
-
-});
+const resend = new Resend(
+    process.env.RESEND_API_KEY
+);
 
 app.use(cors({
     origin: [
@@ -228,6 +202,10 @@ app.post("/booking", async function(req, res) {
 
     try {
 
+        // =========================
+        // SAVE BOOKING TO DATABASE
+        // =========================
+
         const result = await db.query(`
             INSERT INTO orders (
                 "orderID",
@@ -268,20 +246,28 @@ app.post("/booking", async function(req, res) {
 
         ]);
 
+
         console.log("Booking baru:");
         console.log(result.rows[0]);
 
+
+        // =========================
+        // SEND EMAIL NOTIFICATION
+        // =========================
+
         try {
 
-    await emailTransporter.sendMail({
+            const { data, error } =
+                await resend.emails.send({
 
-        from: process.env.NADIGO_EMAIL,
+                    from: process.env.NADIGO_EMAIL,
 
-        to: process.env.NADIGO_EMAIL,
+                    to: process.env.NADIGO_EMAIL,
 
-        subject: "🧺 NadiGo - New Booking",
+                    subject:
+                        "🧺 NadiGo - New Booking",
 
-        text:
+                    text:
 `NEW BOOKING NadiGo
 
 Order ID: ${booking.orderID}
@@ -311,27 +297,50 @@ Status:
 ${booking.status}
 `
 
-    });
+                });
 
-    console.log("EMAIL NOTIFICATION BERJAYA DIHANTAR");
 
-}
+            if (error) {
 
-catch(emailError) {
+                console.error(
+                    "EMAIL NOTIFICATION GAGAL:",
+                    error
+                );
 
-    console.error(
-        "EMAIL NOTIFICATION GAGAL:",
-        emailError
-    );
+            }
 
-}
+            else {
 
+                console.log(
+                    "EMAIL NOTIFICATION BERJAYA DIHANTAR:",
+                    data
+                );
+
+            }
+
+        }
+
+        catch(emailError) {
+
+            console.error(
+                "EMAIL NOTIFICATION ERROR:",
+                emailError
+            );
+
+        }
+
+
+        // =========================
+        // RETURN SUCCESS
+        // =========================
 
         res.json({
 
-            message: "Booking berjaya diterima",
+            message:
+                "Booking berjaya diterima",
 
-            data: result.rows[0]
+            data:
+                result.rows[0]
 
         });
 
@@ -346,14 +355,14 @@ catch(emailError) {
 
         res.status(500).json({
 
-            message: "Booking gagal disimpan"
+            message:
+                "Booking gagal disimpan"
 
         });
 
     }
 
 });
-
 
 // =========================
 // GET ALL ORDERS
