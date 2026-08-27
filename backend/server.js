@@ -10,7 +10,9 @@ require("dotenv").config();
 const app = express();
 
 const emailTransporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
     auth: {
         user: process.env.NADIGO_EMAIL,
         pass: process.env.NADIGO_EMAIL_APP_PASSWORD
