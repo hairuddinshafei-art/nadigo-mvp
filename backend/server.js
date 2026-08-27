@@ -3,10 +3,38 @@ const cors = require("cors");
 const db = require("./database");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
 
 require("dotenv").config();
 
 const app = express();
+
+const emailTransporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: process.env.NADIGO_EMAIL,
+        pass: process.env.NADIGO_EMAIL_APP_PASSWORD
+    }
+});
+
+emailTransporter.verify(function(error, success) {
+
+    if (error) {
+
+        console.error(
+            "EMAIL CONFIG ERROR:",
+            error
+        );
+
+    } else {
+
+        console.log(
+            "NADIGO EMAIL SERVER READY"
+        );
+
+    }
+
+});
 
 app.use(cors({
     origin: [
@@ -239,6 +267,62 @@ app.post("/booking", async function(req, res) {
 
         console.log("Booking baru:");
         console.log(result.rows[0]);
+
+        try {
+
+    await emailTransporter.sendMail({
+
+        from: process.env.NADIGO_EMAIL,
+
+        to: process.env.NADIGO_EMAIL,
+
+        subject: "🧺 NadiGo - New Booking",
+
+        text:
+`NEW BOOKING NadiGo
+
+Order ID: ${booking.orderID}
+
+Customer:
+${booking.name}
+
+Phone:
+${booking.phone}
+
+Address:
+${booking.address}
+
+Service:
+${booking.service}
+
+Weight:
+${booking.weight} kg
+
+Price:
+RM${booking.price}
+
+Pickup Date:
+${booking.pickupDate}
+
+Status:
+${booking.status}
+`
+
+    });
+
+    console.log("EMAIL NOTIFICATION BERJAYA DIHANTAR");
+
+}
+
+catch(emailError) {
+
+    console.error(
+        "EMAIL NOTIFICATION GAGAL:",
+        emailError
+    );
+
+}
+
 
         res.json({
 
