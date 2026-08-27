@@ -260,7 +260,7 @@ app.post("/booking", async function(req, res) {
             const { data, error } =
                 await resend.emails.send({
 
-                    from: process.env.NADIGO_EMAIL,
+                    from: "booking@nadigo.my",
 
                     to: process.env.NADIGO_EMAIL,
 
