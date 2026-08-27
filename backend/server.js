@@ -13,6 +13,7 @@ const emailTransporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
     secure: false,
+    family: 4,
     auth: {
         user: process.env.NADIGO_EMAIL,
         pass: process.env.NADIGO_EMAIL_APP_PASSWORD
