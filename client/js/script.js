@@ -2,18 +2,25 @@
 const API_URL = "https://nadigo-backend.onrender.com";
 
 console.log("NadiGo JS Connected");
-function updateOrder(button) {
-    console.log("script masuk");
-    const order = button.closest(".order-item");
 
-    const status = order.querySelector(".status");
+
+function updateOrder(button) {
+
+    console.log("script masuk");
+
+    const order =
+        button.closest(".order-item");
+
+    const status =
+        order.querySelector(".status");
 
 
     if (status.classList.contains("pending")) {
 
         status.innerHTML = "Processing";
 
-        status.className = "status processing";
+        status.className =
+            "status processing";
 
         button.innerHTML = "Ready";
 
@@ -23,7 +30,8 @@ function updateOrder(button) {
 
         status.innerHTML = "Ready";
 
-        status.className = "status ready";
+        status.className =
+            "status ready";
 
         button.innerHTML = "Delivery";
 
@@ -33,7 +41,8 @@ function updateOrder(button) {
 
         status.innerHTML = "Delivered";
 
-        status.className = "status delivered";
+        status.className =
+            "status delivered";
 
         button.innerHTML = "Completed";
 
@@ -43,154 +52,189 @@ function updateOrder(button) {
 
 }
 
+
 function acceptOrder() {
 
     const select =
         document.getElementById("statusSelect");
 
-    // Tukar dropdown kepada Pickup Scheduled
-    select.value = "Pickup Scheduled";
+    select.value =
+        "Pickup Scheduled";
 
-    // Simpan status ke database
     updateStatus();
 
 }
 
+
 function updateDashboardStatus() {
 
+    const savedStatus =
+        localStorage.getItem("NDG-0001-status");
 
-    const savedStatus = localStorage.getItem("NDG-0001-status");
+    const status =
+        document.getElementById("dashboardStatus");
 
-
-    const status = document.getElementById("dashboardStatus");
-
-
-    const action = document.getElementById("orderAction");
+    const action =
+        document.getElementById("orderAction");
 
 
     if (savedStatus && status) {
 
+        status.innerHTML =
+            savedStatus;
 
-        status.innerHTML = savedStatus;
-
-
-        status.className = "status processing";
-
+        status.className =
+            "status processing";
 
         action.innerHTML = `
-
-        <button onclick="updateOrder(this)">
-            Continue
-        </button>
-
+            <button onclick="updateOrder(this)">
+                Continue
+            </button>
         `;
 
-
     }
-
 
 }
 
 
-window.addEventListener("load", updateDashboardStatus);
+window.addEventListener(
+    "load",
+    updateDashboardStatus
+);
+
 
 function updateStatus() {
 
+    let status =
+        document.getElementById("statusSelect").value;
 
-    let status = document.getElementById("statusSelect").value;
-
-
-    let orderID = localStorage.getItem("currentOrderID");
-
-
-    console.log("UPDATE STATUS:", status);
-
-    console.log("ORDER ID:", orderID);
+    let orderID =
+        localStorage.getItem("currentOrderID");
 
 
+    console.log(
+        "UPDATE STATUS:",
+        status
+    );
 
-    fetch(API_URL + "/orders/" + orderID, {
-
-
-        method: "PUT",
-
-
-        headers: {
-
-            "Content-Type":
-                "application/json",
-
-            "Authorization":
-                "Bearer " +
-                localStorage.getItem(
-                    "nadigoAdminToken"
-                )
-
-        },
+    console.log(
+        "ORDER ID:",
+        orderID
+    );
 
 
-        body: JSON.stringify({
+    fetch(
+        API_URL +
+        "/orders/" +
+        orderID,
+        {
 
-            status: status
+            method: "PUT",
 
-        })
+            headers: {
 
+                "Content-Type":
+                    "application/json",
 
-    })
+                "Authorization":
+                    "Bearer " +
+                    localStorage.getItem(
+                        "nadigoAdminToken"
+                    )
 
+            },
 
-        .then(response => response.json())
+            body: JSON.stringify({
 
+                status:
+                    status
 
-        .then(data => {
+            })
 
-            console.log("STATUS UPDATED:", data);
+        }
+    )
 
+        .then(
+            response =>
+                response.json()
+        )
 
-            if (data.data) {
-
-                const updatedOrder =
-                    data.data;
-
-
-                document.getElementById("orderStatus").innerHTML =
-                    updatedOrder.status;
-
-
-                document.getElementById("statusSelect").value =
-                    updatedOrder.status;
-
+        .then(
+            data => {
 
                 console.log(
-                    "Status terus berubah:",
-                    updatedOrder.status
+                    "STATUS UPDATED:",
+                    data
                 );
 
+
+                if (data.data) {
+
+                    const updatedOrder =
+                        data.data;
+
+
+                    const orderStatus =
+                        document.getElementById(
+                            "orderStatus"
+                        );
+
+                    const statusSelect =
+                        document.getElementById(
+                            "statusSelect"
+                        );
+
+
+                    if (orderStatus) {
+
+                        orderStatus.innerHTML =
+                            updatedOrder.status;
+
+                    }
+
+
+                    if (statusSelect) {
+
+                        statusSelect.value =
+                            updatedOrder.status;
+
+                    }
+
+
+                    console.log(
+                        "Status terus berubah:",
+                        updatedOrder.status
+                    );
+
+                }
+
             }
+        )
 
-        })
+        .catch(
+            error => {
 
+                console.log(error);
 
-        .catch(error => {
-
-
-            console.log(error);
-
-
-        });
-
+            }
+        );
 
 }
 
 
 function calculatePrice() {
 
-    let weight = Number(
-        document.getElementById("weightSlider").value
-    );
+    let weight =
+        Number(
+            document.getElementById(
+                "weightSlider"
+            ).value
+        );
 
     let service =
-        document.getElementById("serviceSelect").value;
+        document.getElementById(
+            "serviceSelect"
+        ).value;
 
 
     let price = 0;
@@ -198,70 +242,108 @@ function calculatePrice() {
 
     if (service === "Wash & Fold") {
 
-        price = weight * 9;
+        price =
+            weight * 9;
 
     }
 
-    else if (service === "Express Laundry") {
+    else if (
+        service === "Express Laundry"
+    ) {
 
-        price = weight * 12;
+        price =
+            weight * 12;
 
     }
 
 
-    // Minimum charge RM27
-
-    price = Math.max(price, 27);
-
-
-    // Update harga
-
-    document.getElementById("sliderPrice").textContent =
-        "RM" + price.toFixed(2);
+    price =
+        Math.max(price, 27);
 
 
-    // Update berat
+    const sliderPrice =
+        document.getElementById(
+            "sliderPrice"
+        );
 
-    document.getElementById("weightValue").textContent =
-        weight.toFixed(1);
+    const weightValue =
+        document.getElementById(
+            "weightValue"
+        );
+
+
+    if (sliderPrice) {
+
+        sliderPrice.textContent =
+            "RM" +
+            price.toFixed(2);
+
+    }
+
+
+    if (weightValue) {
+
+        weightValue.textContent =
+            weight.toFixed(1);
+
+    }
+
 }
+
 
 function saveBooking() {
 
-    console.log("SAVE BOOKING DIPANGGIL");
+    console.log(
+        "SAVE BOOKING DIPANGGIL"
+    );
+
 
     const submitButton =
-        document.querySelector(".continue-btn");
+        document.querySelector(
+            ".continue-btn"
+        );
 
-
-    // =========================
-    // PREVENT DOUBLE SUBMIT
-    // =========================
 
     if (
+        !submitButton ||
         submitButton.disabled ||
-        sessionStorage.getItem("nadigoSubmitting") === "true"
+        sessionStorage.getItem(
+            "nadigoSubmitting"
+        ) === "true"
     ) {
-        console.log("BOOKING SEDANG DIHANTAR");
+
+        console.log(
+            "BOOKING SEDANG DIHANTAR"
+        );
+
         return;
+
     }
 
 
-    // =========================
-    // GET CUSTOMER DATA
-    // =========================
-
     let name =
-        document.getElementById("customerName").value.trim();
+        document
+            .getElementById("customerName")
+            .value
+            .trim();
 
     let phone =
-        document.getElementById("customerPhone").value.trim();
+        document
+            .getElementById("customerPhone")
+            .value
+            .trim();
 
     let address =
-        document.getElementById("customerAddress").value.trim();
+        document
+            .getElementById("customerAddress")
+            .value
+            .trim();
 
     let pickupDate =
-        document.getElementById("pickupDate").value.trim();
+        document
+            .getElementById("pickupDate")
+            .value
+            .trim();
 
 
     console.log(
@@ -270,35 +352,39 @@ function saveBooking() {
     );
 
 
-    // =========================
-    // VALIDATION
-    // =========================
-
     if (name === "") {
 
-        alert("Sila masukkan nama anda.");
+        alert(
+            "Sila masukkan nama anda."
+        );
 
         document
             .getElementById("customerName")
             .focus();
 
         return;
+
     }
 
 
     if (phone === "") {
 
-        alert("Sila masukkan nombor telefon.");
+        alert(
+            "Sila masukkan nombor telefon."
+        );
 
         document
             .getElementById("customerPhone")
             .focus();
 
         return;
+
     }
 
 
-    if (!/^[0-9]{9,10}$/.test(phone)) {
+    if (
+        !/^[0-9]{9,10}$/.test(phone)
+    ) {
 
         alert(
             "Sila masukkan nombor telefon yang sah. Contoh: 123456789"
@@ -309,59 +395,68 @@ function saveBooking() {
             .focus();
 
         return;
+
     }
 
 
     if (address === "") {
 
-        alert("Sila masukkan alamat pickup.");
+        alert(
+            "Sila masukkan alamat pickup."
+        );
 
         document
             .getElementById("customerAddress")
             .focus();
 
         return;
+
     }
 
 
     if (pickupDate === "") {
 
-        alert("Sila pilih tarikh pickup.");
+        alert(
+            "Sila pilih tarikh pickup."
+        );
 
         document
             .getElementById("pickupDate")
             .focus();
 
         return;
+
     }
 
-
-    // =========================
-    // BOOKING DATA
-    // =========================
 
     let bookingData = {
 
         orderID:
-            "NDG-" + Date.now(),
+            "NDG-" +
+            Date.now(),
 
         name:
             name,
 
         phone:
-            "+60" + phone,
+            "+60" +
+            phone,
 
         address:
             address,
 
         service:
             document
-                .getElementById("serviceSelect")
+                .getElementById(
+                    "serviceSelect"
+                )
                 .value,
 
         weight:
             document
-                .getElementById("weightSlider")
+                .getElementById(
+                    "weightSlider"
+                )
                 .value,
 
         price:
@@ -382,25 +477,18 @@ function saveBooking() {
     );
 
 
-    // =========================
-    // LOCK BUTTON
-    // =========================
-
     sessionStorage.setItem(
         "nadigoSubmitting",
         "true"
     );
 
 
-    submitButton.disabled = true;
+    submitButton.disabled =
+        true;
 
     submitButton.innerHTML =
         "⏳ SUBMITTING BOOKING...";
 
-
-    // =========================
-    // SHOW SENDING MESSAGE
-    // =========================
 
     let sendingMessage =
         document.getElementById(
@@ -411,7 +499,9 @@ function saveBooking() {
     if (!sendingMessage) {
 
         sendingMessage =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
         sendingMessage.id =
             "bookingSendingMessage";
@@ -434,12 +524,9 @@ function saveBooking() {
     `;
 
 
-    // =========================
-    // SEND TO BACKEND
-    // =========================
-
     fetch(
-        API_URL + "/booking",
+        API_URL +
+        "/booking",
         {
 
             method: "POST",
@@ -459,345 +546,490 @@ function saveBooking() {
         }
     )
 
+        .then(
+            function(response) {
 
-    .then(function(response) {
+                console.log(
+                    "RESPONSE STATUS:",
+                    response.status
+                );
 
-        console.log(
-            "RESPONSE STATUS:",
-            response.status
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Booking gagal dihantar ke server."
+                    );
+
+                }
+
+
+                return response.json();
+
+            }
+        )
+
+        .then(
+            function(data) {
+
+                console.log(
+                    "BACKEND RESPONSE:",
+                    data
+                );
+
+
+                localStorage.setItem(
+
+                    "nadigoBooking",
+
+                    JSON.stringify(
+                        bookingData
+                    )
+
+                );
+
+
+                console.log(
+                    "DATA DISIMPAN:",
+                    localStorage.getItem(
+                        "nadigoBooking"
+                    )
+                );
+
+
+                console.log(
+                    "SEBELUM REDIRECT"
+                );
+
+
+                window.location.replace(
+                    "confirmation.html"
+                );
+
+            }
+        )
+
+        .catch(
+            function(error) {
+
+                console.error(
+                    "BOOKING ERROR:",
+                    error
+                );
+
+
+                sessionStorage.removeItem(
+                    "nadigoSubmitting"
+                );
+
+
+                submitButton.disabled =
+                    false;
+
+                submitButton.innerHTML =
+                    "Continue Booking →";
+
+
+                if (sendingMessage) {
+
+                    sendingMessage.remove();
+
+                }
+
+
+                alert(
+                    "Booking gagal dihantar. Sila cuba lagi."
+                );
+
+            }
         );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Booking gagal dihantar ke server."
-            );
-
-        }
-
-
-        return response.json();
-
-    })
-
-
-    .then(function(data) {
-
-        console.log(
-            "BACKEND RESPONSE:",
-            data
-        );
-
-
-        // =========================
-        // SAVE BOOKING
-        // =========================
-
-        localStorage.setItem(
-
-            "nadigoBooking",
-
-            JSON.stringify(
-                bookingData
-            )
-
-        );
-
-
-        console.log(
-            "DATA DISIMPAN:",
-            localStorage.getItem(
-                "nadigoBooking"
-            )
-        );
-
-
-        // =========================
-        // REDIRECT
-        // =========================
-
-        console.log(
-            "SEBELUM REDIRECT"
-        );
-
-
-        window.location.replace(
-            "confirmation.html"
-        );
-
-    })
-
-
-    .catch(function(error) {
-
-        console.error(
-            "BOOKING ERROR:",
-            error
-        );
-
-
-        // =========================
-        // UNLOCK IF FAILED
-        // =========================
-
-        sessionStorage.removeItem(
-            "nadigoSubmitting"
-        );
-
-
-        submitButton.disabled =
-            false;
-
-        submitButton.innerHTML =
-            "Continue Booking →";
-
-
-        if (sendingMessage) {
-
-            sendingMessage.remove();
-
-        }
-
-
-        alert(
-            "Booking gagal dihantar. Sila cuba lagi."
-        );
-
-    });
 
 }
 
+
 function calculateFinalPrice() {
 
-    let weight = Number(
-        document.getElementById("weightSlider").value
-    );
+    let weight =
+        Number(
+            document.getElementById(
+                "weightSlider"
+            ).value
+        );
 
     let service =
-        document.getElementById("serviceSelect").value;
+        document.getElementById(
+            "serviceSelect"
+        ).value;
+
 
     let price = 0;
 
 
     if (service === "Wash & Fold") {
 
-        price = weight * 9;
+        price =
+            weight * 9;
 
     }
 
-    else if (service === "Express Laundry") {
+    else if (
+        service === "Express Laundry"
+    ) {
 
-        price = weight * 12;
+        price =
+            weight * 12;
 
     }
 
 
-    // Minimum charge RM27
+    price =
+        Math.max(price, 27);
 
-    price = Math.max(price, 27);
 
+    return (
+        "RM" +
+        price.toFixed(2)
+    );
 
-    return "RM" + price.toFixed(2);
 }
-
 
 
 function loadBooking() {
 
+    let data =
+        JSON.parse(
+            localStorage.getItem(
+                "nadigoBooking"
+            )
+        );
 
-    let data = JSON.parse(
-        localStorage.getItem("nadigoBooking")
-    );
 
-
-    if (data) {
-
-        document.getElementById("confirmOrderID").innerHTML = data.orderID;
-
-        document.getElementById("confirmName").innerHTML = data.name;
-
-        document.getElementById("confirmPhone").innerHTML = data.phone;
-
-        document.getElementById("confirmAddress").innerHTML = data.address;
-
-        document.getElementById("confirmService").innerHTML = data.service;
-
-        document.getElementById("confirmWeight").innerHTML = data.weight + "kg";
-
-        document.getElementById("confirmPrice").innerHTML = data.price;
-
-        document.getElementById("confirmPickupDate").innerHTML = data.pickupDate;
-
+    if (!data) {
+        return;
     }
+
+
+    const fields = {
+
+        confirmOrderID:
+            data.orderID,
+
+        confirmName:
+            data.name,
+
+        confirmPhone:
+            data.phone,
+
+        confirmAddress:
+            data.address,
+
+        confirmService:
+            data.service,
+
+        confirmWeight:
+            data.weight + "kg",
+
+        confirmPrice:
+            data.price,
+
+        confirmPickupDate:
+            data.pickupDate
+
+    };
+
+
+    Object.keys(fields).forEach(
+        function(id) {
+
+            const element =
+                document.getElementById(id);
+
+            if (element) {
+
+                element.innerHTML =
+                    fields[id];
+
+            }
+
+        }
+    );
 
 }
 
 
 function loadTracking() {
 
-    console.log("loadTracking jalan");
+    console.log(
+        "loadTracking jalan"
+    );
 
 
-    let id = new URLSearchParams(window.location.search)
-        .get("id");
+    let id =
+        new URLSearchParams(
+            window.location.search
+        ).get("id");
 
 
-    console.log("TRACK ID:", id);
+    console.log(
+        "TRACK ID:",
+        id
+    );
 
 
-    fetch(API_URL + "/tracking/" + id)
+    fetch(
+        API_URL +
+        "/tracking/" +
+        id
+    )
 
-        .then(response => {
+        .then(
+            response => {
 
-            if (!response.ok) {
-                throw new Error("Order tidak dijumpai");
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Order tidak dijumpai"
+                    );
+
+                }
+
+                return response.json();
+
             }
+        )
 
-            return response.json();
+        .then(
+            order => {
 
-        })
+                console.log(
+                    "ORDER TRACKING:",
+                    order
+                );
 
-        .then(order => {
 
-            console.log("ORDER TRACKING:", order);
+                if (!order) {
+                    return;
+                }
 
 
-            if (!order) {
+                const fields = {
+
+                    trackOrderID:
+                        order.orderID,
+
+                    trackName:
+                        order.name,
+
+                    trackService:
+                        order.service,
+
+                    trackWeight:
+                        order.weight + "kg",
+
+                    trackPrice:
+                        order.price,
+
+                    trackPickupDate:
+                        order.pickupDate,
+
+                    trackStatus:
+                        order.status
+
+                };
+
+
+                Object.keys(fields).forEach(
+                    function(id) {
+
+                        const element =
+                            document.getElementById(
+                                id
+                            );
+
+                        if (element) {
+
+                            element.innerHTML =
+                                fields[id];
+
+                        }
+
+                    }
+                );
+
+
+                if (order.actualWeight) {
+
+                    const row =
+                        document.getElementById(
+                            "actualWeightRow"
+                        );
+
+                    const value =
+                        document.getElementById(
+                            "trackActualWeight"
+                        );
+
+
+                    if (row) {
+                        row.style.display =
+                            "flex";
+                    }
+
+                    if (value) {
+                        value.innerHTML =
+                            order.actualWeight +
+                            "kg";
+                    }
+
+                }
+
+
+                if (order.actualPrice) {
+
+                    const row =
+                        document.getElementById(
+                            "actualPriceRow"
+                        );
+
+                    const value =
+                        document.getElementById(
+                            "trackActualPrice"
+                        );
+
+
+                    if (row) {
+                        row.style.display =
+                            "flex";
+                    }
+
+                    if (value) {
+                        value.innerHTML =
+                            order.actualPrice;
+                    }
+
+                }
+
+
+                console.log(
+                    "STATUS TRACK:",
+                    order.status
+                );
+
+
+                updateTimeline(
+                    order.status
+                );
+
+            }
+        )
+
+        .catch(
+            error => {
+
+                console.log(
+                    "TRACKING ERROR:",
+                    error
+                );
+
+            }
+        );
+
+}
+
+
+function updateTimeline(status) {
+
+    console.log(
+        "UPDATE TIMELINE:",
+        status
+    );
+
+
+    let steps = [
+
+        "Booking Received",
+
+        "Pickup Scheduled",
+
+        "Laundry Processing",
+
+        "Ready for Delivery",
+
+        "Delivered"
+
+    ];
+
+
+    let current =
+        steps.indexOf(status);
+
+
+    console.log(
+        "CURRENT STEP:",
+        current
+    );
+
+
+    steps.forEach(
+        function(step, index) {
+
+            let element =
+                document.getElementById(
+                    "step" +
+                    (index + 1)
+                );
+
+
+            if (!element) {
                 return;
             }
 
 
-            document.getElementById("trackOrderID").innerHTML =
-                order.orderID;
+            if (index <= current) {
 
+                element.innerHTML =
+                    "✓ " +
+                    step;
 
-            document.getElementById("trackName").innerHTML =
-                order.name;
-
-
-            document.getElementById("trackService").innerHTML =
-                order.service;
-
-
-            document.getElementById("trackWeight").innerHTML =
-                order.weight + "kg";
-
-
-            document.getElementById("trackPrice").innerHTML =
-                order.price;
-
-                document.getElementById("trackPickupDate").innerHTML =
-    order.pickupDate;
-
-
-            // =========================
-            // ACTUAL WEIGHT & PRICE
-            // =========================
-
-            if (order.actualWeight) {
-
-                document.getElementById("actualWeightRow").style.display =
-                    "flex";
-
-                document.getElementById("trackActualWeight").innerHTML =
-                    order.actualWeight + "kg";
+                element.className =
+                    "done";
 
             }
 
+            else {
 
-            if (order.actualPrice) {
+                element.innerHTML =
+                    "○ " +
+                    step;
 
-                document.getElementById("actualPriceRow").style.display =
-                    "flex";
-
-                document.getElementById("trackActualPrice").innerHTML =
-                    order.actualPrice;
+                element.className =
+                    "";
 
             }
 
-
-            console.log("STATUS TRACK:", order.status);
-
-
-            document.getElementById("trackStatus").innerHTML =
-                order.status;
-
-
-            updateTimeline(order.status);
-
-        })
-
-
-        .catch(error => {
-
-            console.log("TRACKING ERROR:", error);
-
-        });
+        }
+    );
 
 }
 
-function updateTimeline(status) {
-
-    console.log("UPDATE TIMELINE:", status);
-
-
-    let steps = [
-        "Booking Received",
-        "Pickup Scheduled",
-        "Laundry Processing",
-        "Ready for Delivery",
-        "Delivered"
-    ];
-
-
-    let current = steps.indexOf(status);
-
-
-    console.log("CURRENT STEP:", current);
-
-
-    steps.forEach(function (step, index) {
-
-
-        let element = document.getElementById(
-            "step" + (index + 1)
-        );
-
-
-        if (index <= current) {
-
-
-            element.innerHTML = "✓ " + step;
-
-            element.className = "done";
-
-
-        }
-
-        else {
-
-
-            element.innerHTML = "○ " + step;
-
-            element.className = "";
-
-
-        }
-
-
-    });
-
-}
 
 function acceptBooking() {
 
-    let data = JSON.parse(
-        localStorage.getItem("nadigoBooking")
-    );
+    let data =
+        JSON.parse(
+            localStorage.getItem(
+                "nadigoBooking"
+            )
+        );
 
 
-    data.status = "Pickup Scheduled";
+    if (!data) {
+        return;
+    }
+
+
+    data.status =
+        "Pickup Scheduled";
 
 
     localStorage.setItem(
@@ -806,79 +1038,134 @@ function acceptBooking() {
     );
 
 
-    alert("Order Accepted");
+    alert(
+        "Order Accepted"
+    );
 
 }
+
 
 function loadDashboard() {
 
-    let data = JSON.parse(
-        localStorage.getItem("nadigoBooking")
-    );
+    let data =
+        JSON.parse(
+            localStorage.getItem(
+                "nadigoBooking"
+            )
+        );
 
 
-    if (data) {
-
-        document.getElementById("dashboardOrderID").innerHTML = data.orderID;
-
-        document.getElementById("dashboardName").innerHTML = data.name;
-
-        document.getElementById("dashboardWeight").innerHTML = data.weight + "kg";
-
-        document.getElementById("dashboardStatus").innerHTML = data.status;
-
-
+    if (!data) {
+        return;
     }
+
+
+    const fields = {
+
+        dashboardOrderID:
+            data.orderID,
+
+        dashboardName:
+            data.name,
+
+        dashboardWeight:
+            data.weight + "kg",
+
+        dashboardStatus:
+            data.status
+
+    };
+
+
+    Object.keys(fields).forEach(
+        function(id) {
+
+            const element =
+                document.getElementById(id);
+
+            if (element) {
+
+                element.innerHTML =
+                    fields[id];
+
+            }
+
+        }
+    );
 
 }
 
+
 function loadOrderDetail() {
 
+    let id =
+        new URLSearchParams(
+            window.location.search
+        ).get("id");
 
-    let id = new URLSearchParams(window.location.search)
-        .get("id");
 
-    console.log("ID DAPAT:", id);
+    console.log(
+        "ID DAPAT:",
+        id
+    );
 
 
     const token =
-        localStorage.getItem("nadigoAdminToken");
+        localStorage.getItem(
+            "nadigoAdminToken"
+        );
 
 
-    fetch(API_URL + "/orders", {
+    fetch(
+        API_URL +
+        "/orders",
+        {
 
-        headers: {
+            headers: {
 
-            "Authorization":
-                "Bearer " + token
+                "Authorization":
+                    "Bearer " +
+                    token
+
+            }
 
         }
+    )
 
-    })
+        .then(
+            response =>
+                response.json()
+        )
+
+        .then(
+            data => {
+
+                let order =
+                    data.find(
+                        function(item) {
+
+                            return (
+                                item.orderID == id
+                            );
+
+                        }
+                    );
 
 
-        .then(response => response.json())
+                if (!order) {
+                    return;
+                }
 
 
-        .then(data => {
+                console.log(
+                    "ACTUAL WEIGHT DARI DATABASE:",
+                    order.actualWeight
+                );
 
-
-
-
-
-            let order = data.find(function (item) {
-
-
-                return item.orderID == id;
-
-
-            });
-
-
-            if (order) {
-
-                console.log("ACTUAL WEIGHT DARI DATABASE:", order.actualWeight);
-console.log("ACTUAL PRICE DARI DATABASE:", order.actualPrice);
+                console.log(
+                    "ACTUAL PRICE DARI DATABASE:",
+                    order.actualPrice
+                );
 
 
                 localStorage.setItem(
@@ -886,60 +1173,78 @@ console.log("ACTUAL PRICE DARI DATABASE:", order.actualPrice);
                     order.orderID
                 );
 
+
                 console.log(
                     "CURRENT ORDER ID:",
                     order.orderID
                 );
 
 
+                const fields = {
+
+                    detailName:
+                        order.name,
+
+                    detailPhone:
+                        order.phone,
+
+                    detailAddress:
+                        order.address,
+
+                    detailService:
+                        order.service,
+
+                    detailWeight:
+                        order.weight + "kg",
+
+                    detailPrice:
+                        order.price,
+
+                    detailPickupDate:
+                        order.pickupDate,
+
+                    orderStatus:
+                        order.status ||
+                        "Booking Received"
+
+                };
 
 
-                document.getElementById("detailName").innerHTML =
-                    order.name;
+                Object.keys(fields).forEach(
+                    function(id) {
 
+                        const element =
+                            document.getElementById(
+                                id
+                            );
 
+                        if (element) {
 
-                document.getElementById("detailPhone").innerHTML =
-                    order.phone;
+                            element.innerHTML =
+                                fields[id];
 
+                        }
 
+                    }
+                );
 
-                document.getElementById("detailAddress").innerHTML =
-                    order.address;
-
-
-
-                document.getElementById("detailService").innerHTML =
-                    order.service;
-
-
-
-                document.getElementById("detailWeight").innerHTML =
-                    order.weight + "kg";
-
-
-
-                document.getElementById("detailPrice").innerHTML =
-                    order.price;
-
-                    document.getElementById("detailPickupDate").innerHTML =
-    order.pickupDate;
-
-                // =========================
-                // ACTUAL WEIGHT & PRICE
-                // =========================
 
                 const actualWeightInput =
-                    document.getElementById("actualWeight");
+                    document.getElementById(
+                        "actualWeight"
+                    );
 
                 const actualPriceDisplay =
-                    document.getElementById("actualPrice");
+                    document.getElementById(
+                        "actualPrice"
+                    );
 
 
                 if (actualWeightInput) {
 
                     actualWeightInput.value =
-                        order.actualWeight || "";
+                        order.actualWeight ||
+                        "";
 
                 }
 
@@ -947,239 +1252,361 @@ console.log("ACTUAL PRICE DARI DATABASE:", order.actualPrice);
                 if (actualPriceDisplay) {
 
                     actualPriceDisplay.textContent =
-                        order.actualPrice || "RM0.00";
+                        order.actualPrice ||
+                        "RM0.00";
 
                 }
 
 
+                const statusSelect =
+                    document.getElementById(
+                        "statusSelect"
+                    );
 
-                document.getElementById("orderStatus").innerHTML =
-                    order.status || "Booking Received";
 
+                if (statusSelect) {
 
+                    statusSelect.value =
+                        order.status ||
+                        "Booking Received";
 
-                document.getElementById("statusSelect").value =
-                    order.status || "Booking Received";
-
+                }
 
             }
+        )
 
+        .catch(
+            error => {
 
-        })
+                console.log(error);
 
-
-        .catch(error => {
-
-            console.log(error);
-
-        });
-
+            }
+        );
 
 }
 
 
 function loadOrders() {
 
-    console.log("LOAD ORDERS JALAN");
+    console.log(
+        "LOAD ORDERS JALAN"
+    );
+
 
     const token =
-        localStorage.getItem("nadigoAdminToken");
+        localStorage.getItem(
+            "nadigoAdminToken"
+        );
 
 
-    fetch(API_URL + "/orders", {
+    fetch(
+        API_URL +
+        "/orders",
+        {
 
-        headers: {
+            headers: {
 
-            "Authorization":
-                "Bearer " + token
+                "Authorization":
+                    "Bearer " +
+                    token
+
+            }
 
         }
+    )
 
-    })
+        .then(
+            response =>
+                response.json()
+        )
 
-        .then(response => response.json())
+        .then(
+            data => {
 
-        .then(data => {
-
-            let container =
-                document.getElementById("ordersContainer");
-
-            container.innerHTML = "";
-
-
-            data.forEach(function (order) {
-
-                container.innerHTML += `
-
-                    <div class="order-item">
-
-                        <div>
-
-                            <h3>
-                                ${order.orderID}
-                            </h3>
-
-                            <p>
-                                Customer:
-                                ${order.name}
-                            </p>
-
-                            <p>
-                                Weight:
-                                ${order.weight}kg
-                            </p>
-
-                        </div>
+                let container =
+                    document.getElementById(
+                        "ordersContainer"
+                    );
 
 
-                        <span class="status pending">
-
-    ${order.status}
-
-</span>
+                if (!container) {
+                    return;
+                }
 
 
-                        <a
-                            href="order-detail.html?id=${order.orderID}"
-                            class="view-btn"
-                        >
-                            View
-                        </a>
+                container.innerHTML =
+                    "";
 
-                    </div>
 
-                `;
+                data.forEach(
+                    function(order) {
 
-            });
+                        container.innerHTML += `
 
-        })
+                            <div class="order-item">
 
-        .catch(error => {
+                                <div>
 
-            console.log(error);
+                                    <h3>
+                                        ${order.orderID}
+                                    </h3>
 
-        });
+                                    <p>
+                                        Customer:
+                                        ${order.name}
+                                    </p>
+
+                                    <p>
+                                        Weight:
+                                        ${order.weight}kg
+                                    </p>
+
+                                </div>
+
+                                <span class="status pending">
+                                    ${order.status}
+                                </span>
+
+                                <a
+                                    href="order-detail.html?id=${order.orderID}"
+                                    class="view-btn"
+                                >
+                                    View
+                                </a>
+
+                            </div>
+
+                        `;
+
+                    }
+                );
+
+            }
+        )
+
+        .catch(
+            error => {
+
+                console.log(error);
+
+            }
+        );
 
 }
 
 
-let weightSlider = document.getElementById("weightSlider");
+let weightSlider =
+    document.getElementById(
+        "weightSlider"
+    );
+
 
 if (weightSlider) {
 
-    weightSlider.addEventListener("input", function () {
+    weightSlider.addEventListener(
+        "input",
+        function() {
 
-        let kg = parseFloat(this.value);
-
-        let percentage =
-            ((this.value - this.min) / (this.max - this.min)) * 100;
-
-
-        this.style.background =
-            `linear-gradient(
-to right,
-#0066ff 0%,
-#0066ff ${percentage}%,
-#ddd ${percentage}%,
-#ddd 100%
-)`;
-
-        let price;
+            let kg =
+                parseFloat(this.value);
 
 
-        if (kg < 3) {
+            let percentage =
+                (
+                    (this.value - this.min) /
+                    (this.max - this.min)
+                ) * 100;
 
-            price = 27;
 
-        } else {
+            this.style.background =
+                `linear-gradient(
+                    to right,
+                    #0066ff 0%,
+                    #0066ff ${percentage}%,
+                    #ddd ${percentage}%,
+                    #ddd 100%
+                )`;
 
-            price = kg * 9;
+
+            let price;
+
+
+            if (kg < 3) {
+
+                price = 27;
+
+            }
+
+            else {
+
+                price =
+                    kg * 9;
+
+            }
+
+
+            const weightValue =
+                document.getElementById(
+                    "weightValue"
+                );
+
+            const sliderPrice =
+                document.getElementById(
+                    "sliderPrice"
+                );
+
+
+            if (weightValue) {
+
+                weightValue.innerHTML =
+                    kg.toFixed(1);
+
+            }
+
+
+            if (sliderPrice) {
+
+                sliderPrice.innerHTML =
+                    "RM" +
+                    price.toFixed(2);
+
+            }
 
         }
-
-
-        document.getElementById("weightValue").innerHTML =
-            kg.toFixed(1);
-
-
-        document.getElementById("sliderPrice").innerHTML =
-            "RM" + price.toFixed(2);
-
-
-    });
+    );
 
 }
 
+
 let pickupDateInput =
-    document.getElementById("pickupDate");
+    document.getElementById(
+        "pickupDate"
+    );
+
 
 if (pickupDateInput) {
 
-    let today = new Date();
+    let today =
+        new Date();
 
-    let year = today.getFullYear();
+
+    let year =
+        today.getFullYear();
+
 
     let month =
-        String(today.getMonth() + 1).padStart(2, "0");
+        String(
+            today.getMonth() + 1
+        ).padStart(2, "0");
+
 
     let day =
-        String(today.getDate()).padStart(2, "0");
+        String(
+            today.getDate()
+        ).padStart(2, "0");
+
 
     let minDate =
         `${year}-${month}-${day}`;
 
-    pickupDateInput.min = minDate;
-}
 
-console.log("flatpickr check:", typeof flatpickr);
-
-
-if (document.getElementById("pickupDate")) {
-
-    flatpickr("#pickupDate", {
-
-        minDate: "today",
-        dateFormat: "d-m-Y"
-
-    });
+    pickupDateInput.min =
+        minDate;
 
 }
 
-console.log("SCRIPT.JS LOADED");
 
-if (document.getElementById("weightSlider")) {
+console.log(
+    "flatpickr check:",
+    typeof flatpickr
+);
 
-    document.getElementById("weightSlider").addEventListener("input", function () {
 
-        calculatePrice();
+if (
+    document.getElementById(
+        "pickupDate"
+    ) &&
+    typeof flatpickr !== "undefined"
+) {
 
-    });
+    flatpickr(
+        "#pickupDate",
+        {
+
+            minDate: "today",
+
+            dateFormat: "d-m-Y"
+
+        }
+    );
 
 }
-// =========================
-// ACTUAL PRICE CALCULATION
-// =========================
+
+
+console.log(
+    "SCRIPT.JS LOADED"
+);
+
+
+if (
+    document.getElementById(
+        "weightSlider"
+    )
+) {
+
+    document
+        .getElementById(
+            "weightSlider"
+        )
+        .addEventListener(
+            "input",
+            function() {
+
+                calculatePrice();
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   ACTUAL PRICE CALCULATION
+========================================================= */
 
 function calculateActualPrice() {
 
     const weightInput =
-        document.getElementById("actualWeight");
+        document.getElementById(
+            "actualWeight"
+        );
 
     const priceDisplay =
-        document.getElementById("actualPrice");
+        document.getElementById(
+            "actualPrice"
+        );
 
 
-    if (!weightInput || !priceDisplay) {
+    if (
+        !weightInput ||
+        !priceDisplay
+    ) {
+
         return;
+
     }
 
 
     const weight =
-        Number(weightInput.value);
+        Number(
+            weightInput.value
+        );
 
 
     const serviceElement =
-        document.getElementById("detailService");
+        document.getElementById(
+            "detailService"
+        );
 
 
     if (!serviceElement) {
@@ -1191,9 +1618,13 @@ function calculateActualPrice() {
         serviceElement.textContent.trim();
 
 
-    if (!weight || weight <= 0) {
+    if (
+        !weight ||
+        weight <= 0
+    ) {
 
-        priceDisplay.textContent = "RM0.00";
+        priceDisplay.textContent =
+            "RM0.00";
 
         return;
 
@@ -1203,33 +1634,39 @@ function calculateActualPrice() {
     let price = 0;
 
 
-    if (service === "Wash & Fold") {
+    if (
+        service === "Wash & Fold"
+    ) {
 
-        price = weight * 9;
-
-    }
-
-    else if (service === "Express Laundry") {
-
-        price = weight * 12;
+        price =
+            weight * 9;
 
     }
 
+    else if (
+        service === "Express Laundry"
+    ) {
 
-    // Minimum charge RM27
+        price =
+            weight * 12;
 
-    price = Math.max(price, 27);
+    }
+
+
+    price =
+        Math.max(price, 27);
 
 
     priceDisplay.textContent =
-        "RM" + price.toFixed(2);
+        "RM" +
+        price.toFixed(2);
 
 }
 
 
-// =========================
-// SAVE ACTUAL PRICE
-// =========================
+/* =========================================================
+   SAVE ACTUAL PRICE
+========================================================= */
 
 function saveActualPrice() {
 
@@ -1245,35 +1682,50 @@ function saveActualPrice() {
 
     const actualWeight =
         Number(
-            document.getElementById("actualWeight").value
+            document.getElementById(
+                "actualWeight"
+            ).value
         );
 
 
     const actualPrice =
-        document.getElementById("actualPrice").textContent;
+        document.getElementById(
+            "actualPrice"
+        ).textContent;
 
 
     if (!orderID) {
 
-        alert("Order ID tidak dijumpai.");
+        alert(
+            "Order ID tidak dijumpai."
+        );
 
         return;
 
     }
 
 
-    if (!actualWeight || actualWeight <= 0) {
+    if (
+        !actualWeight ||
+        actualWeight <= 0
+    ) {
 
-        alert("Sila masukkan actual weight.");
+        alert(
+            "Sila masukkan actual weight."
+        );
 
         return;
 
     }
 
 
-    if (actualPrice === "RM0.00") {
+    if (
+        actualPrice === "RM0.00"
+    ) {
 
-        alert("Harga sebenar tidak dapat dikira.");
+        alert(
+            "Harga sebenar tidak dapat dikira."
+        );
 
         return;
 
@@ -1281,10 +1733,10 @@ function saveActualPrice() {
 
 
     fetch(
-    API_URL +
-    "/orders/" +
-    orderID +
-    "/actual",
+        API_URL +
+        "/orders/" +
+        orderID +
+        "/actual",
         {
 
             method: "PUT",
@@ -1302,7 +1754,6 @@ function saveActualPrice() {
 
             },
 
-
             body: JSON.stringify({
 
                 actualWeight:
@@ -1316,362 +1767,567 @@ function saveActualPrice() {
         }
     )
 
+        .then(
+            response =>
+                response.json()
+        )
 
-        .then(response => response.json())
+        .then(
+            data => {
 
-
-        .then(data => {
-
-            console.log(
-                "ACTUAL PRICE RESPONSE:",
-                data
-            );
-
-
-            if (data.data) {
-
-                const savedOrder = data.data;
+                console.log(
+                    "ACTUAL PRICE RESPONSE:",
+                    data
+                );
 
 
-                const actualWeightInput =
-                    document.getElementById("actualWeight");
+                if (data.data) {
 
-                const actualPriceDisplay =
-                    document.getElementById("actualPrice");
+                    const savedOrder =
+                        data.data;
 
 
-                if (actualWeightInput) {
+                    const actualWeightInput =
+                        document.getElementById(
+                            "actualWeight"
+                        );
 
-                    actualWeightInput.value =
-                        savedOrder.actualWeight;
+                    const actualPriceDisplay =
+                        document.getElementById(
+                            "actualPrice"
+                        );
+
+
+                    if (actualWeightInput) {
+
+                        actualWeightInput.value =
+                            savedOrder.actualWeight;
+
+                    }
+
+
+                    if (actualPriceDisplay) {
+
+                        actualPriceDisplay.textContent =
+                            savedOrder.actualPrice;
+
+                    }
+
+
+                    const message =
+                        document.getElementById(
+                            "actualSaveMessage"
+                        );
+
+
+                    if (message) {
+
+                        message.textContent =
+                            "✓ Actual price berjaya disimpan.";
+
+                        message.className =
+                            "actual-save-message success";
+
+                    }
+
+
+                    const button =
+                        document.querySelector(
+                            ".save-price-btn"
+                        );
+
+
+                    if (button) {
+
+                        button.textContent =
+                            "✓ Saved";
+
+                        button.disabled =
+                            true;
+
+                    }
 
                 }
 
+                else {
 
-                if (actualPriceDisplay) {
-
-                    actualPriceDisplay.textContent =
-                        savedOrder.actualPrice;
-
-                }
-
-
-                const message =
-                    document.getElementById("actualSaveMessage");
-
-
-                if (message) {
-
-                    message.textContent =
-                        "✓ Actual price berjaya disimpan.";
-
-                    message.className =
-                        "actual-save-message success";
-
-                }
-
-
-                const button =
-                    document.querySelector(".save-price-btn");
-
-
-                if (button) {
-
-                    button.textContent =
-                        "✓ Saved";
-
-                    button.disabled = true;
+                    alert(
+                        "Gagal simpan actual price."
+                    );
 
                 }
 
             }
+        )
 
-            else {
+        .catch(
+            error => {
+
+                console.log(error);
 
                 alert(
-                    "Gagal simpan actual price."
+                    "Backend error."
                 );
 
             }
-
-        })
-
-
-        .catch(error => {
-
-            console.log(error);
-
-            alert(
-                "Backend error."
-            );
-
-        });
+        );
 
 }
 
 
 function loadDashboardRecentOrders() {
 
-    console.log("LOAD DASHBOARD RECENT ORDERS");
+    console.log(
+        "LOAD DASHBOARD RECENT ORDERS"
+    );
+
 
     const token =
-        localStorage.getItem("nadigoAdminToken");
+        localStorage.getItem(
+            "nadigoAdminToken"
+        );
 
 
-    fetch(API_URL + "/orders", {
+    fetch(
+        API_URL +
+        "/orders",
+        {
 
-        headers: {
+            headers: {
 
-            "Authorization":
-                "Bearer " + token
+                "Authorization":
+                    "Bearer " +
+                    token
+
+            }
 
         }
+    )
 
-    })
+        .then(
+            response =>
+                response.json()
+        )
 
-        .then(response => response.json())
+        .then(
+            data => {
 
-        .then(data => {
+                const container =
+                    document.getElementById(
+                        "ordersContainer"
+                    );
 
-            const container =
-                document.getElementById("ordersContainer");
 
-            if (!container) {
-                return;
+                if (!container) {
+                    return;
+                }
+
+
+                container.innerHTML =
+                    "";
+
+
+                const newOrders =
+                    data.filter(
+                        function(order) {
+
+                            return (
+                                order.status ===
+                                "Booking Received"
+                            );
+
+                        }
+                    );
+
+
+                if (
+                    newOrders.length === 0
+                ) {
+
+                    container.innerHTML = `
+                        <p class="no-orders">
+                            No new orders
+                        </p>
+                    `;
+
+                    return;
+
+                }
+
+
+                newOrders.forEach(
+                    function(order) {
+
+                        container.innerHTML += `
+
+                            <div class="order-item">
+
+                                <div>
+
+                                    <h3>
+                                        ${order.orderID}
+                                    </h3>
+
+                                    <p>
+                                        Customer:
+                                        ${order.name}
+                                    </p>
+
+                                    <p>
+                                        Weight:
+                                        ${order.weight}kg
+                                    </p>
+
+                                </div>
+
+                                <span class="status pending">
+                                    ${order.status}
+                                </span>
+
+                                <a
+                                    href="order-detail.html?id=${order.orderID}"
+                                    class="view-btn"
+                                >
+                                    View
+                                </a>
+
+                            </div>
+
+                        `;
+
+                    }
+                );
+
             }
+        )
 
-            container.innerHTML = "";
+        .catch(
+            error => {
 
+                console.log(
+                    "Dashboard error:",
+                    error
+                );
 
-            // Hanya order baru
-            const newOrders = data.filter(function (order) {
-    return order.status === "Booking Received";
-});
-
-            if (newOrders.length === 0) {
-
-                container.innerHTML = `
-                    <p class="no-orders">
-                        No new orders
-                    </p>
-                `;
-
-                return;
             }
-
-
-            newOrders.forEach(function (order) {
-
-                container.innerHTML += `
-
-                    <div class="order-item">
-
-                        <div>
-
-                            <h3>
-                                ${order.orderID}
-                            </h3>
-
-                            <p>
-                                Customer:
-                                ${order.name}
-                            </p>
-
-                            <p>
-                                Weight:
-                                ${order.weight}kg
-                            </p>
-
-                        </div>
-
-
-                        <span class="status pending">
-                            ${order.status}
-                        </span>
-
-
-                        <a
-                            href="order-detail.html?id=${order.orderID}"
-                            class="view-btn"
-                        >
-                            View
-                        </a>
-
-                    </div>
-
-                `;
-
-            });
-
-        })
-
-        .catch(error => {
-
-            console.log(
-                "Dashboard error:",
-                error
-            );
-
-        });
+        );
 
 }
+
 
 function loadDashboardStats() {
 
-    console.log("LOAD DASHBOARD STATS");
+    console.log(
+        "LOAD DASHBOARD STATS"
+    );
+
 
     const token =
-        localStorage.getItem("nadigoAdminToken");
+        localStorage.getItem(
+            "nadigoAdminToken"
+        );
 
 
-    fetch(API_URL + "/orders", {
+    fetch(
+        API_URL +
+        "/orders",
+        {
 
-        headers: {
+            headers: {
 
-            "Authorization":
-                "Bearer " + token
+                "Authorization":
+                    "Bearer " +
+                    token
+
+            }
 
         }
+    )
 
-    })
+        .then(
+            response =>
+                response.json()
+        )
 
-        .then(response => response.json())
+        .then(
+            data => {
 
-        .then(data => {
-
-            let newOrders = 0;
-            let pending = 0;
-            let processing = 0;
-            let ready = 0;
-
-
-            data.forEach(function (order) {
-
-                if (order.status === "Booking Received") {
-
-                    newOrders++;
-
-                }
-
-                else if (order.status === "Pickup Scheduled") {
-
-                    pending++;
-
-                }
-
-                else if (order.status === "Laundry Processing") {
-
-                    processing++;
-
-                }
-
-                else if (order.status === "Ready for Delivery") {
-
-                    ready++;
-
-                }
-
-            });
+                let newOrders = 0;
+                let pending = 0;
+                let processing = 0;
+                let ready = 0;
 
 
-            document.getElementById("newOrdersCount").innerHTML =
-                newOrders;
+                data.forEach(
+                    function(order) {
 
-            document.getElementById("pendingCount").innerHTML =
-                pending;
+                        if (
+                            order.status ===
+                            "Booking Received"
+                        ) {
 
-            document.getElementById("processingCount").innerHTML =
-                processing;
+                            newOrders++;
 
-            document.getElementById("readyCount").innerHTML =
-                ready;
+                        }
+
+                        else if (
+                            order.status ===
+                            "Pickup Scheduled"
+                        ) {
+
+                            pending++;
+
+                        }
+
+                        else if (
+                            order.status ===
+                            "Laundry Processing"
+                        ) {
+
+                            processing++;
+
+                        }
+
+                        else if (
+                            order.status ===
+                            "Ready for Delivery"
+                        ) {
+
+                            ready++;
+
+                        }
+
+                    }
+                );
 
 
-        })
+                const elements = {
 
-        .catch(error => {
+                    newOrdersCount:
+                        newOrders,
 
-            console.log(
-                "Dashboard stats error:",
-                error
-            );
+                    pendingCount:
+                        pending,
 
-        });
+                    processingCount:
+                        processing,
+
+                    readyCount:
+                        ready
+
+                };
+
+
+                Object.keys(elements).forEach(
+                    function(id) {
+
+                        const element =
+                            document.getElementById(
+                                id
+                            );
+
+                        if (element) {
+
+                            element.innerHTML =
+                                elements[id];
+
+                        }
+
+                    }
+                );
+
+            }
+        )
+
+        .catch(
+            error => {
+
+                console.log(
+                    "Dashboard stats error:",
+                    error
+                );
+
+            }
+        );
 
 }
 
+
 function trackOrder() {
 
-    console.log("TRACK ORDER JALAN");
+    console.log(
+        "TRACK ORDER JALAN"
+    );
+
 
     const input =
-        document.getElementById("trackingInput");
+        document.getElementById(
+            "trackingInput"
+        );
 
     const error =
-        document.getElementById("trackingError");
+        document.getElementById(
+            "trackingError"
+        );
 
     const result =
-        document.getElementById("trackingResult");
+        document.getElementById(
+            "trackingResult"
+        );
+
+
+    if (
+        !input ||
+        !error ||
+        !result
+    ) {
+
+        return;
+
+    }
+
 
     const orderID =
         input.value.trim();
 
-
-    // =========================
-    // CHECK INPUT
-    // =========================
 
     if (orderID === "") {
 
         error.innerHTML =
             "Sila masukkan Order ID.";
 
-        result.style.display = "none";
+        result.style.display =
+            "none";
 
         return;
+
     }
 
 
-    console.log("SEARCH ORDER:", orderID);
+    console.log(
+        "SEARCH ORDER:",
+        orderID
+    );
 
-
-    // =========================
-    // GET ORDER
-    // =========================
 
     fetch(
-        API_URL + "/tracking/" +
-        encodeURIComponent(orderID)
+        API_URL +
+        "/tracking/" +
+        encodeURIComponent(
+            orderID
+        )
     )
 
-        .then(response => {
+        .then(
+            response => {
 
-            if (!response.ok) {
+                if (!response.ok) {
 
-                throw new Error(
-                    "Order tidak dijumpai."
-                );
+                    throw new Error(
+                        "Order tidak dijumpai."
+                    );
+
+                }
+
+                return response.json();
 
             }
+        )
 
-            return response.json();
+        .then(
+            order => {
 
-        })
-
-
-        .then(order => {
-
-            console.log(
-                "ORDER:",
-                order
-            );
+                console.log(
+                    "ORDER:",
+                    order
+                );
 
 
-            // =========================
-            // ORDER NOT FOUND
-            // =========================
+                if (!order) {
 
-            if (!order) {
+                    error.innerHTML =
+                        "Order ID tidak dijumpai.";
+
+                    result.style.display =
+                        "none";
+
+                    return;
+
+                }
+
+
+                error.innerHTML =
+                    "";
+
+
+                const fields = {
+
+                    resultOrderID:
+                        order.orderID,
+
+                    resultName:
+                        order.name,
+
+                    resultService:
+                        order.service,
+
+                    resultEstimatedWeight:
+                        order.weight + "kg",
+
+                    resultActualWeight:
+                        order.actualWeight
+                            ? order.actualWeight +
+                              "kg"
+                            : "Pending",
+
+                    resultEstimatedPrice:
+                        order.price,
+
+                    resultActualPrice:
+                        order.actualPrice
+                            ? order.actualPrice
+                            : "Pending",
+
+                    resultStatus:
+                        order.status ||
+                        "Booking Received"
+
+                };
+
+
+                Object.keys(fields).forEach(
+                    function(id) {
+
+                        const element =
+                            document.getElementById(
+                                id
+                            );
+
+                        if (element) {
+
+                            element.innerHTML =
+                                fields[id];
+
+                        }
+
+                    }
+                );
+
+
+                result.style.display =
+                    "block";
+
+            }
+        )
+
+        .catch(
+            errorObject => {
+
+                console.log(
+                    "TRACKING ERROR:",
+                    errorObject
+                );
+
 
                 error.innerHTML =
                     "Order ID tidak dijumpai.";
@@ -1679,152 +2335,85 @@ function trackOrder() {
                 result.style.display =
                     "none";
 
-                return;
-
             }
+        );
+
+}
 
 
-            // =========================
-            // ORDER FOUND
-            // =========================
+/* =========================================================
+   NADIGO MOBILE MENU
+========================================================= */
 
-            error.innerHTML = "";
+const menuToggle =
+    document.getElementById(
+        "menuToggle"
+    );
 
-
-            document.getElementById(
-                "resultOrderID"
-            ).innerHTML =
-                order.orderID;
-
-
-            document.getElementById(
-                "resultName"
-            ).innerHTML =
-                order.name;
+const navLinks =
+    document.querySelector(
+        ".nav-links"
+    );
 
 
-            document.getElementById(
-                "resultService"
-            ).innerHTML =
-                order.service;
+if (
+    menuToggle &&
+    navLinks
+) {
+
+    menuToggle.addEventListener(
+        "click",
+        function() {
+
+            const isOpen =
+                navLinks.classList.toggle(
+                    "active"
+                );
 
 
-            // =========================
-            // ESTIMATED WEIGHT
-            // =========================
-
-            document.getElementById(
-                "resultEstimatedWeight"
-            ).innerHTML =
-                order.weight + "kg";
+            menuToggle.innerHTML =
+                isOpen
+                    ? "✕"
+                    : "☰";
 
 
-            // =========================
-            // ACTUAL WEIGHT
-            // =========================
-
-            document.getElementById(
-                "resultActualWeight"
-            ).innerHTML =
-                order.actualWeight
-                    ? order.actualWeight + "kg"
-                    : "Pending";
-
-
-            // =========================
-            // ESTIMATED PRICE
-            // =========================
-
-            document.getElementById(
-                "resultEstimatedPrice"
-            ).innerHTML =
-                order.price;
-
-
-            // =========================
-            // ACTUAL PRICE
-            // =========================
-
-            document.getElementById(
-                "resultActualPrice"
-            ).innerHTML =
-                order.actualPrice
-                    ? order.actualPrice
-                    : "Pending";
-
-
-            // =========================
-            // STATUS
-            // =========================
-
-            document.getElementById(
-                "resultStatus"
-            ).innerHTML =
-                order.status ||
-                "Booking Received";
-
-
-            result.style.display =
-                "block";
-
-        })
-
-
-        .catch(error => {
-
-            console.log(
-                "TRACKING ERROR:",
-                error
+            menuToggle.setAttribute(
+                "aria-expanded",
+                isOpen
+                    ? "true"
+                    : "false"
             );
 
-            error.innerHTML =
-                "Order ID tidak dijumpai.";
-
-            result.style.display =
-                "none";
-
-        });
-
-}
-
-// =========================
-// NADIGO MOBILE MENU
-// =========================
-
-const menuToggle = document.getElementById("menuToggle");
-const navLinks = document.querySelector(".nav-links");
-
-if (menuToggle && navLinks) {
-
-    menuToggle.addEventListener("click", function () {
-
-        navLinks.classList.toggle("active");
-
-        if (navLinks.classList.contains("active")) {
-
-            menuToggle.innerHTML = "✕";
-
-        } else {
-
-            menuToggle.innerHTML = "☰";
-
         }
+    );
 
-    });
 
+    navLinks
+        .querySelectorAll("a")
+        .forEach(
+            function(link) {
 
-    // Tutup menu bila tekan link
+                link.addEventListener(
+                    "click",
+                    function() {
 
-    navLinks.querySelectorAll("a").forEach(function (link) {
+                        navLinks.classList.remove(
+                            "active"
+                        );
 
-        link.addEventListener("click", function () {
+                        menuToggle.innerHTML =
+                            "☰";
 
-            navLinks.classList.remove("active");
+                        menuToggle.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
 
-            menuToggle.innerHTML = "☰";
+                    }
+                );
 
-        });
-
-    });
+            }
+        );
 
 }
+

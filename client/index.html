@@ -1,290 +1,881 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>NadiGo | Laundry Pickup & Delivery</title>
+    <title>Nadigo | Laundry Pickup & Delivery</title>
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/home.css">
-
 </head>
-
 
 <body>
 
-
+    <!-- NAVBAR -->
     <nav class="navbar">
-
         <div class="nav-container">
 
-            <div class="logo">
-                Nadi<span>Go</span>
-            </div>
+            <a href="#" class="logo">
+                Nadi<span>go</span>
+            </a>
 
-            <button class="menu-toggle" id="menuToggle">
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Open menu"
+                aria-expanded="false"
+                type="button"
+            >
                 ☰
             </button>
 
             <ul class="nav-links">
-
                 <li><a href="#">Home</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#how">How It Works</a></li>
-                <li><a href="pages/track-order.html">
-                        Track Order</a></li>
-                <!-- <a href="pages/partner.html">Partner</a>
-</li> -->
-
+                <li>
+                    <a href="pages/track-order.html">
+                        Track Order
+                    </a>
+                </li>
             </ul>
 
-            <a href="pages/booking.html">
-
-                <button class="nav-button">
-                    Book Now
-                </button>
-
+            <a href="pages/booking.html" class="nav-button">
+                Book Now
             </a>
 
         </div>
-
     </nav>
 
 
+    <!-- HERO -->
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-container">
+
+                <div class="hero-content">
+
+                    <div class="hero-eyebrow">
+                        <span class="eyebrow-dot"></span>
+                        Laundry Pickup & Delivery
+                    </div>
+
+                    <h1>
+                        Laundry dah
+                        <span>bertimbun?</span>
+                        <br>
+                        Biar Nadigo
+                        <span>uruskan.</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        Tak perlu keluar rumah atau luangkan masa ke dobi.
+                        Book pickup, kami ambil laundry anda, uruskan proses
+                        cucian dan hantar semula bila dah siap.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="pages/booking.html" class="primary-btn">
+                            Book a Pickup
+                            <span class="arrow">→</span>
+                        </a>
+
+                        <a href="#how" class="secondary-link">
+                            See how it works
+                            <span>↓</span>
+                        </a>
+
+                    </div>
+
+                    <div class="hero-note">
+                        <span>✓</span>
+                        Pickup & delivery included
+                    </div>
+
+                </div>
 
 
-    <section class="hero">
+                <div class="hero-visual">
+
+                    <div class="hero-image-wrapper">
+
+                        <!-- BEFORE -->
+                        <div class="laundry-scene messy-scene">
+
+                            <img
+                                src="images/laundry-waiting.jpg"
+                                alt="Laundry waiting to be washed"
+                            >
+
+                            <div class="scene-label">
+                                <span class="label-icon">+</span>
+                                Laundry waiting
+                            </div>
+
+                        </div>
 
 
-        <div class="hero-text">
+                        <!-- AFTER -->
+                        <div class="laundry-scene clean-scene">
+
+                            <img
+                                src="images/fresh-laundry.jpg"
+                                alt="Fresh folded clean laundry"
+                            >
+
+                            <div class="scene-label clean-label">
+                                <span class="label-icon">✓</span>
+                                Fresh & folded
+                            </div>
+
+                        </div>
 
 
-            <p class="tag">
-                Laundry Pickup & Delivery Platform
-            </p>
+                        <!-- BUBBLES -->
+                        <span class="bubble bubble-1"></span>
+                        <span class="bubble bubble-2"></span>
+                        <span class="bubble bubble-3"></span>
+                        <span class="bubble bubble-4"></span>
 
 
-            <h1>
-                Your Laundry.
-                <br>
-                Delivered Easily.
-            </h1>
+                        <!-- FRESH CARD -->
+                        <div class="fresh-card">
+
+                            <div class="fresh-icon">
+                                ✦
+                            </div>
+
+                            <div>
+                                <strong>Fresh laundry</strong>
+                                <span>Ready to go</span>
+                            </div>
+
+                        </div>
+
+                    </div>
 
 
-            <p>
-                NadiGo membawa pengalaman dobi yang lebih mudah dan moden. Kami uruskan pengambilan, proses cucian dan
-                penghantaran semula pakaian bersih terus ke pintu rumah anda.
-            </p>
+                    <!-- ORDER CARD -->
+                    <div class="floating-order-card">
+
+                        <div class="order-top">
+                            <span>NDG</span>
+                            <span class="order-status">● Ready</span>
+                        </div>
+
+                        <div class="order-line"></div>
+
+                        <div class="order-bottom">
+                            <span>Your laundry</span>
+                            <strong>5.2 kg</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
 
 
-            <div class="hero-btn">
+        <!-- PROBLEM -->
+        <section class="problem-section">
+
+            <div class="section-container">
+
+                <div class="problem-heading">
+
+                    <span class="section-eyebrow">
+                        The laundry problem
+                    </span>
+
+                    <h2>
+                        Bukan tak nak buat.
+                        <br>
+                        <span>Cuma tak sempat.</span>
+                    </h2>
+
+                    <p>
+                        Kerja, keluarga, urusan harian —
+                        laundry pula masih menunggu.
+                    </p>
+
+                </div>
 
 
-                <a href="pages/booking.html">
+                <div class="problem-grid">
 
-                    <button>
-                        Book Pickup
-                    </button>
+                    <div class="problem-card">
 
+                        <span class="problem-number">01</span>
+
+                        <div class="problem-icon">
+                            🧺
+                        </div>
+
+                        <h3>
+                            Laundry makin bertimbun
+                        </h3>
+
+                        <p>
+                            Hari demi hari, makin banyak yang perlu
+                            dibasuh dan dilipat.
+                        </p>
+
+                    </div>
+
+
+                    <div class="problem-card">
+
+                        <span class="problem-number">02</span>
+
+                        <div class="problem-icon">
+                            ⏰
+                        </div>
+
+                        <h3>
+                            Masa pula tak cukup
+                        </h3>
+
+                        <p>
+                            Nak pergi dobi, tunggu, ambil semula —
+                            semuanya makan masa.
+                        </p>
+
+                    </div>
+
+
+                    <div class="problem-card highlight-card">
+
+                        <span class="problem-number">03</span>
+
+                        <div class="problem-icon">
+                            ✨
+                        </div>
+
+                        <h3>
+                            Ada cara yang lebih mudah
+                        </h3>
+
+                        <p>
+                            Serahkan urusan laundry kepada Nadigo
+                            dan guna masa untuk benda lain.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SOLUTION -->
+        <section class="solution-section">
+
+            <div class="section-container solution-container">
+
+                <div class="solution-copy">
+
+                    <span class="section-eyebrow">
+                        Meet Nadigo
+                    </span>
+
+                    <h2>
+                        Anda tak perlu
+                        <span>datang ke dobi.</span>
+                    </h2>
+
+                    <p>
+                        NadiGo memudahkan urusan laundry dengan
+                        pickup dan delivery terus dari pintu rumah.
+                    </p>
+
+                    <a
+                        href="pages/booking.html"
+                        class="text-cta"
+                    >
+                        Book your pickup
+                        <span>→</span>
+                    </a>
+
+                </div>
+
+
+                <div class="solution-visual">
+
+                    <div class="solution-flow">
+
+                        <div class="flow-item">
+
+                            <div class="flow-icon">
+                                📱
+                            </div>
+
+                            <div>
+                                <strong>Book</strong>
+                                <span>Online</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="flow-arrow">
+                            →
+                        </div>
+
+
+                        <div class="flow-item">
+
+                            <div class="flow-icon">
+                                🚗
+                            </div>
+
+                            <div>
+                                <strong>Pickup</strong>
+                                <span>From you</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="flow-arrow">
+                            →
+                        </div>
+
+
+                        <div class="flow-item">
+
+                            <div class="flow-icon">
+                                🫧
+                            </div>
+
+                            <div>
+                                <strong>Clean</strong>
+                                <span>Fresh</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="flow-arrow">
+                            →
+                        </div>
+
+
+                        <div class="flow-item">
+
+                            <div class="flow-icon">
+                                ✨
+                            </div>
+
+                            <div>
+                                <strong>Return</strong>
+                                <span>To you</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SERVICES -->
+        <section id="services" class="services">
+
+            <div class="section-container">
+
+                <div class="section-header">
+
+                    <span class="section-eyebrow">
+                        What we handle
+                    </span>
+
+                    <h2>
+                        Laundry, made simpler.
+                    </h2>
+
+                    <p>
+                        Pilih servis yang sesuai dengan keperluan anda.
+                    </p>
+
+                </div>
+
+
+                <div class="service-grid">
+
+                    <div class="service-card">
+
+                        <div class="service-card-top">
+
+                            <div class="service-icon">
+                                🧺
+                            </div>
+
+                            <span class="service-number">
+                                01
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            Wash & Fold
+                        </h3>
+
+                        <p>
+                            Cucian harian yang siap dibasuh,
+                            dikeringkan dan dilipat dengan kemas.
+                        </p>
+
+                        <div class="service-footer">
+                            <span>From</span>
+                            <strong>RM9/kg</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="service-card featured-service">
+
+                        <div class="service-card-top">
+
+                            <div class="service-icon">
+                                ⚡
+                            </div>
+
+                            <span class="service-number">
+                                02
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            Express Laundry
+                        </h3>
+
+                        <p>
+                            Untuk yang perlukan laundry diselesaikan
+                            dengan lebih cepat.
+                        </p>
+
+                        <div class="service-footer">
+                            <span>Faster</span>
+                            <strong>Available</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="service-card">
+
+                        <div class="service-card-top">
+
+                            <div class="service-icon">
+                                🚚
+                            </div>
+
+                            <span class="service-number">
+                                03
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            Pickup & Delivery
+                        </h3>
+
+                        <p>
+                            Kami datang ambil laundry dan hantar
+                            semula apabila siap.
+                        </p>
+
+                        <div class="service-footer">
+                            <span>Door to door</span>
+                            <strong>✓</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- HOW IT WORKS -->
+        <section id="how" class="how">
+
+            <div class="section-container">
+
+                <div class="section-header centered">
+
+                    <span class="section-eyebrow">
+                        Simple by design
+                    </span>
+
+                    <h2>
+                        Dari bertimbun ke settle.
+                    </h2>
+
+                    <p>
+                        Empat langkah mudah. Selebihnya biar kami uruskan.
+                    </p>
+
+                </div>
+
+
+                <div class="steps">
+
+                    <div class="step">
+
+                        <span class="step-number">
+                            01
+                        </span>
+
+                        <div class="step-icon">
+                            📱
+                        </div>
+
+                        <h3>
+                            Book
+                        </h3>
+
+                        <p>
+                            Pilih servis dan waktu pickup.
+                        </p>
+
+                    </div>
+
+
+                    <div class="step-connector">
+                        →
+                    </div>
+
+
+                    <div class="step">
+
+                        <span class="step-number">
+                            02
+                        </span>
+
+                        <div class="step-icon">
+                            🚗
+                        </div>
+
+                        <h3>
+                            Pickup
+                        </h3>
+
+                        <p>
+                            Kami datang ambil laundry anda.
+                        </p>
+
+                    </div>
+
+
+                    <div class="step-connector">
+                        →
+                    </div>
+
+
+                    <div class="step">
+
+                        <span class="step-number">
+                            03
+                        </span>
+
+                        <div class="step-icon">
+                            🫧
+                        </div>
+
+                        <h3>
+                            Clean
+                        </h3>
+
+                        <p>
+                            Laundry dicuci dan disediakan.
+                        </p>
+
+                    </div>
+
+
+                    <div class="step-connector">
+                        →
+                    </div>
+
+
+                    <div class="step">
+
+                        <span class="step-number">
+                            04
+                        </span>
+
+                        <div class="step-icon">
+                            ✨
+                        </div>
+
+                        <h3>
+                            Deliver
+                        </h3>
+
+                        <p>
+                            Laundry bersih dihantar semula.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- TRACKING -->
+        <section class="tracking-section">
+
+            <div class="section-container tracking-container">
+
+                <div class="tracking-copy">
+
+                    <span class="section-eyebrow">
+                        Stay updated
+                    </span>
+
+                    <h2>
+                        Tahu laundry anda
+                        <span>di mana.</span>
+                    </h2>
+
+                    <p>
+                        Setiap booking mempunyai order ID sendiri.
+                        Track status laundry anda bila-bila masa.
+                    </p>
+
+                    <a
+                        href="pages/track-order.html"
+                        class="text-cta"
+                    >
+                        Track your order
+                        <span>→</span>
+                    </a>
+
+                </div>
+
+
+                <div class="tracking-card">
+
+                    <div class="tracking-card-header">
+
+                        <span>
+                            NDG-0001
+                        </span>
+
+                        <span class="tracking-badge">
+                            Processing
+                        </span>
+
+                    </div>
+
+
+                    <div class="tracking-timeline">
+
+                        <div class="timeline-item active">
+
+                            <span class="timeline-dot">
+                                ✓
+                            </span>
+
+                            <div>
+                                <strong>
+                                    Booking Received
+                                </strong>
+
+                                <small>
+                                    Order confirmed
+                                </small>
+                            </div>
+
+                        </div>
+
+
+                        <div class="timeline-line active-line"></div>
+
+
+                        <div class="timeline-item active">
+
+                            <span class="timeline-dot">
+                                ✓
+                            </span>
+
+                            <div>
+                                <strong>
+                                    Pickup
+                                </strong>
+
+                                <small>
+                                    Laundry collected
+                                </small>
+                            </div>
+
+                        </div>
+
+
+                        <div class="timeline-line"></div>
+
+
+                        <div class="timeline-item current">
+
+                            <span class="timeline-dot">
+                                ●
+                            </span>
+
+                            <div>
+                                <strong>
+                                    Washing
+                                </strong>
+
+                                <small>
+                                    Currently processing
+                                </small>
+                            </div>
+
+                        </div>
+
+
+                        <div class="timeline-line"></div>
+
+
+                        <div class="timeline-item">
+
+                            <span class="timeline-dot">
+                                ○
+                            </span>
+
+                            <div>
+                                <strong>
+                                    Ready
+                                </strong>
+
+                                <small>
+                                    Waiting
+                                </small>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FINAL CTA -->
+        <section class="final-cta">
+
+            <div class="final-cta-bubbles">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+
+            <div class="final-cta-content">
+
+                <span class="section-eyebrow">
+                    Less laundry. More time.
+                </span>
+
+                <h2>
+                    Laundry anda
+                    <br>
+                    <span>biar kami uruskan.</span>
+                </h2>
+
+                <p>
+                    Book pickup bila anda dah bersedia.
+                </p>
+
+                <a
+                    href="pages/booking.html"
+                    class="final-btn"
+                >
+                    Book a Pickup
+                    <span>→</span>
                 </a>
 
-
-
-                <!-- <a href="pages/partner.html">
-
-<button class="outline">
-    Become Partner
-</button>
-
-</a> -->
-
-
             </div>
 
+        </section>
 
-        </div>
+    </main>
 
 
-
-        <div class="hero-card">
-
-
-            <div class="laundry-box">
-
-
-
-                <h3>
-                    Fresh Laundry
-                </h3>
-
-
-                <p>
-                    Pickup → Clean → Deliver
-                </p>
-
-
-            </div>
-
-
-        </div>
-
-
-    </section>
-
-
-
-
-
-    <section id="services" class="services">
-
-
-        <h2>
-            Our Services
-        </h2>
-
-
-        <div class="service-grid">
-
-
-            <div class="service-card">
-
-                <h3>
-                    🧺 Wash & Fold
-                </h3>
-
-                <p>
-                    Laundry harian yang mudah.
-                </p>
-
-            </div>
-
-
-
-            <div class="service-card">
-
-                <h3>
-                    🚚 Pickup Delivery
-                </h3>
-
-                <p>
-                    Kami ambil dan hantar.
-                </p>
-
-            </div>
-
-
-
-
-            <div class="service-card">
-
-                <h3>
-                    ⚡ Express
-                </h3>
-
-                <p>
-                    Untuk servis segera.
-                </p>
-
-            </div>
-
-
-        </div>
-
-
-    </section>
-
-
-
-
-
-    <section id="how" class="how">
-
-
-        <h2>
-            How NadiGo Works
-        </h2>
-
-
-        <div class="steps">
-
-
-            <div>
-                01
-                <br>
-                Book
-            </div>
-
-
-            <div>
-                02
-                <br>
-                Pickup
-            </div>
-
-
-            <div>
-                03
-                <br>
-                Clean
-            </div>
-
-
-            <div>
-                04
-                <br>
-                Deliver
-            </div>
-
-
-        </div>
-
-
-    </section>
-
-
-
-
-
-    <!-- <section class="partner">
-
-
-<h2>
-Trusted Laundry Partner Network
-</h2>
-
-
-<p>
-Kami bekerjasama dengan laundry tempatan
-untuk memberikan servis terbaik.
-</p>
-
-
-</section> -->
-
-
-
-
+    <!-- FOOTER -->
     <footer>
 
-        <h2>
-            NadiGo
-        </h2>
+        <div class="footer-container">
 
-        <p>
-            Clean. Delivered. Simple.
-        </p>
+            <div class="footer-brand">
 
+                <a href="#" class="footer-logo">
+                    Nadi<span>go</span>
+                </a>
+
+                <p>
+                    Clean. Delivered. Simple.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="#services">
+                    Services
+                </a>
+
+                <a href="#how">
+                    How It Works
+                </a>
+
+                <a href="pages/track-order.html">
+                    Track Order
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+            © 2026 Nadigo. All rights reserved.
+        </div>
 
     </footer>
 
 
-
     <script src="js/script.js"></script>
 
-
 </body>
-
 </html>
+
