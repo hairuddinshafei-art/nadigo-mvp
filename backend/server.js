@@ -212,6 +212,7 @@ app.post("/booking", async function(req, res) {
                 name,
                 phone,
                 address,
+                "customerNotes",
                 service,
                 weight,
                 price,
@@ -228,7 +229,8 @@ app.post("/booking", async function(req, res) {
                 $6,
                 $7,
                 $8,
-                $9
+                $9,
+                $10
             )
 
             RETURNING *
@@ -238,6 +240,7 @@ app.post("/booking", async function(req, res) {
             booking.name,
             booking.phone,
             booking.address,
+            booking.customerNotes,
             booking.service,
             booking.weight,
             booking.price,
@@ -280,6 +283,9 @@ ${booking.phone}
 
 Address:
 ${booking.address}
+
+Customer Notes:
+${booking.customerNotes || "Tiada pesanan khas"}
 
 Service:
 ${booking.service}

@@ -339,6 +339,12 @@ function saveBooking() {
             .value
             .trim();
 
+            let customerNotes =
+    document
+        .getElementById("customerNotes")
+        .value
+        .trim();
+
     let pickupDate =
         document
             .getElementById("pickupDate")
@@ -444,6 +450,9 @@ function saveBooking() {
 
         address:
             address,
+
+            customerNotes:
+    customerNotes,
 
         service:
             document

@@ -483,3 +483,13 @@
     border-color: #2563eb;
 
 }
+
+.booking-form label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 8px;
+}
+
+.booking-form textarea {
+    margin-bottom: 12px;
+}
